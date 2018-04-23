@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: local
+
+# Local 환경
+---
+spring:
+  profiles: local
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/spring?useSSL=false
+#    username: root
+#    password:
+#    driver-class-name: com.mysql.jdbc.Driver
+
+logging:
+  level:
+    ROOT: debug
