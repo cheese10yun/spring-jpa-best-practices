@@ -42,11 +42,24 @@ public class AccountDto {
     }
 
     @Getter
+    public static class MyAccountReq {
+        private String address1;
+        private String address2;
+        private String zip;
+
+        @Builder
+        public MyAccountReq(String address1, String address2, String zip) {
+            this.address1 = address1;
+            this.address2 = address2;
+            this.zip = zip;
+        }
+    }
+
+    @Getter
     public static class Res {
         private String email;
         private String fistName;
         private String lastName;
-        private String password;
         private String address1;
         private String address2;
         private String zip;
@@ -55,12 +68,9 @@ public class AccountDto {
             this.email = account.getEmail();
             this.fistName = account.getFistName();
             this.lastName = account.getLastName();
-            this.password = account.getPassword();
             this.address1 = account.getAddress1();
             this.address2 = account.getAddress2();
             this.zip = account.getZip();
-
         }
     }
-
 }

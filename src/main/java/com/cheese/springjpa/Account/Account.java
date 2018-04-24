@@ -33,7 +33,7 @@ public class Account {
     @Column(name = "address1", nullable = false)
     private String address1;
 
-    @Column(name = "address1", nullable = false)
+    @Column(name = "address2", nullable = false)
     private String address2;
 
     @Column(name = "zip", nullable = false)
@@ -56,5 +56,11 @@ public class Account {
         this.address1 = address1;
         this.address2 = address2;
         this.zip = zip;
+    }
+
+    public void updateMyAccount(AccountDto.MyAccountReq dto) {
+        this.address1 = dto.getAddress1();
+        this.address2 = dto.getAddress2();
+        this.zip = dto.getZip();
     }
 }

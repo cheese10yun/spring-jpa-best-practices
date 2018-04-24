@@ -11,11 +11,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/spring?useSSL=false
-#    username: root
-#    password:
-#    driver-class-name: com.mysql.jdbc.Driver
 
 logging:
   level:

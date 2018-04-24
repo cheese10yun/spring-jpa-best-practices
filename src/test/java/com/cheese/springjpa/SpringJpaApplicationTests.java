@@ -11,6 +11,7 @@ public class SpringJpaApplicationTests {
 
 	@Test
 	public void contextLoads() {
+        SpringJpaApplication.main(new String[]{});
 	}
 
 }
