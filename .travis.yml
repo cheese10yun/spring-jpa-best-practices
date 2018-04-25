@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - openjdk8
+
+install: true
+
+script: mvn install
+
+branches:
+ only:
+    - master
+
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
+
+notifications:
+  slack: cheese-dev:JXKSTVY4wHsMPbJi2uoKtyxs
