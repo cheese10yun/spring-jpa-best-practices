@@ -42,6 +42,7 @@ public class AccountDto {
     }
 
     @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class MyAccountReq {
         private String address1;
         private String address2;
@@ -53,6 +54,7 @@ public class AccountDto {
             this.address2 = address2;
             this.zip = zip;
         }
+
     }
 
     @Getter
