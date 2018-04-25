@@ -28,6 +28,4 @@ public class AccountController {
     public AccountDto.Res updateMyAccount(@PathVariable final long id, @RequestBody final AccountDto.MyAccountReq dto) {
         return new AccountDto.Res(accountService.updateMyAccount(id, dto));
     }
-
-
 }
