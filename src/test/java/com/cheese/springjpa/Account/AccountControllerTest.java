@@ -17,9 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -80,7 +78,37 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.email", is(dto.getEmail())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
+    }
 
+    @Test
+    public void updateMyAccount() throws Exception {
+        //given
+        final AccountDto.MyAccountReq dto = buildMyAccountReq();
+        final Account account = Account.builder()
+                .address1(dto.getAddress1())
+                .address2(dto.getAddress2())
+                .zip(dto.getZip())
+                .build();
+
+        given(accountService.updateMyAccount(anyLong(), any(AccountDto.MyAccountReq.class))).willReturn(account);
+
+        //when
+        final ResultActions resultActions = requestMyAccount(dto);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
+                .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
+                .andExpect(jsonPath("$.zip", is(dto.getZip())));
+
+    }
+
+    private ResultActions requestMyAccount(AccountDto.MyAccountReq dto) throws Exception {
+        return mockMvc.perform(put("/accounts/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andDo(print());
     }
 
     private AccountDto.MyAccountReq buildMyAccountReq() {
