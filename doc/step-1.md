@@ -1,5 +1,8 @@
 # Step - 1
 
+Spring Boot + JPA를 통해서 Account 생성, 조회, 수정 API를 간단하게 만드는 예제
+
+## 중요 포인트
 * 도메인 클래스 작성
 * DTO 클래스를 이용한 Request, Response
 * Setter 사용안하기
@@ -59,7 +62,7 @@ public class Account {
 기본적으로 `setter` 메서드가 모든 멤버 필드에 대해서 없고 생성자를 이용한 Builder Pattern 메서드에도 생성, 수정 날짜를 제외해 `@CreationTimestamp`, `@UpdateTimestamp` 어노테이션을 이용해서 VM시간 기준으로 날짜가 자동으로 입력하게 하거나 데이터베이스에서 자동으로 입력하게 설정 하는 편이 좋습니다. 매번 생성할 때 create 시간을 넣어 주고, update 할 때 넣어 주고 반복적인 작업과 실수를 줄일 수 있는 효과적인 방법이라고 생각합니다.
 
 ### 객체 생성 제약
-`@NoArgsConstructor(access = AccessLevel.PROTECTED)` lombok 어노테이션을 통해서 객체의 직접생성을 외부에서 못하게 설정하였습니다. 그래서  `@Builder` 에노티이션이 설정되 있는 `Account` 생성자 메소드를 통해서 해당 객체를 생성할 수 있습니다. 이렇게 빌더 패턴을 이용해서 객체 생성을 강요하면 다음과 같은 장점이 있습니다.(빌더 패턴없이 Account 생성자의 모든 인자값을 넣어주면 생성은 가능하다.)
+`@NoArgsConstructor(access = AccessLevel.PROTECTED)` lombok 어노테이션을 통해서 객체의 직접생성을 외부에서 못하게 설정하였습니다. 그래서  `@Builder` 에노티이션이 설정되 있는 `Account` 생성자 메소드를 통해서 해당 객체를 생성할 수 있습니다. 이렇게 빌더 패턴을 이용해서 객체 생성을 강요하면 다음과 같은 장점이 있습니다.(빌더 패턴없이 Account 생성자의 모든 인자값을 넣어주면 생성은 가능합니다.)
 
 #### 객체를 유연하게 생성할 수 있습니다.
 ```java
@@ -154,7 +157,7 @@ Account에 정보를 변경하는 API가 있다고 가정 했을 경우 RequestB
 * 명확해지는 요구사항
   - MyAccountReq 클래스는 마이 어카운트 페이지에서 변경할 수 있는 값들로 address1, address2, zip 속성이 있습니다. 요구사항이 이 세 가지 속성에 대한 변경임으로 해당 API가 어떤 값들을 변경할 수있는지 명확해 집니다.
 
-### 컨트롤러
+### 컨트롤러에서의 DTO
 
 ```java
 @RequestMapping(method = RequestMethod.POST)
