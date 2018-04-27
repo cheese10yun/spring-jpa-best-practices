@@ -1,6 +1,23 @@
 # Spring-Jpa Best Practices [![Build Status](https://travis-ci.org/cheese10yun/spring-jpa.svg?branch=master)](https://travis-ci.org/cheese10yun/spring-jpa) [![Coverage Status](https://coveralls.io/repos/github/cheese10yun/spring-jpa/badge.svg?branch=master)](https://coveralls.io/github/cheese10yun/spring-jpa?branch=master)
 
-Spring, JPA 기술에 대한 시행창오를 겪으면서 제가 생각 했을 때 좋은 구조를 정리 해 보았습니다.
+최근 스프링을 6개월 가까이 하면서 제가 느낀 점들에 대해서 간단하게 정리했습니다. **아직 부족한 게 많아 Best Practices라도 당당하게 말하긴 어렵지만, 저와 같은 고민을 하시는 분들에게 조금이라도 도움이 되고 싶어 이렇게 정리했습니다.** 지속해서 해당 프로젝트를 이어 나아갈 예정이라 깃허브 Start, Watching 버튼을 누르시면 구독 신청받으실 수 있습니다. 저의 경험이 여러분에게 조금이라도 도움이 되기를 기원합니다.
+
+## 프로젝트 실행환경
+
+* Lombok이 반드시 설치 되있어야 합니다.
+  - [Eclipse 설치 : [lombok] eclipse(STS)에 lombok(롬복) 설치](http://countryxide.tistory.com/16)
+  - [Intell J 설치 : [Intellij] lombok 사용하기](http://blog.woniper.net/229)
+
+### 실행
+```
+$ mvn spring-boot:run
+```
+
+### API Swagger
+![](https://i.imgur.com/1cc1auF.png)
+해당 API는 Swagger [http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)으로 테스트해 볼 수 있습니다.
+
+
 
 ## [Step-1](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-1.md)
 
