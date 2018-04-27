@@ -19,7 +19,7 @@ $ mvn spring-boot:run
 
 
 
-## [Step-1](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-1.md)
+## [Step-01](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-01.md)
 
 Spring Boot + JPA를 통해서 Account 생성, 조회, 수정 API를 간단하게 만드는 예제
 
