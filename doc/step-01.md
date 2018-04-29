@@ -1,6 +1,5 @@
-# Step - 1
-
-Spring Boot + JPA를 통해서 Account 생성, 조회, 수정 API를 간단하게 만드는 예제
+# Step-01
+Spring Boot + JPA를 활용한 Account 생성, 조회, 수정 API를 간단하게 만드는 예제입니다. 해당 코드는 [spring-jpa](https://github.com/cheese10yun/spring-jpa)를 확인해주세요.
 
 ## 중요 포인트
 * 도메인 클래스 작성
@@ -211,3 +210,6 @@ public void updateMyAccount(AccountDto.MyAccountReq dto) {
 DTO 클래스를 이용해서 데이터 변경을 하는 것이 훨씬더 직관적이고 유지보수 하기 쉽다고 생각합니다.  MyAccountReq 클래스에는 3개의 필드가 있으니 오직 3개의 필드만 변경이 가능하다는 것이 아주 명확해집니다.
 
 여기서 제가 중요하다고 생각하는 것은 `updateMyAccount(AccountDto.MyAccountReq dto)` 메소드입니다. **객체 자신을 변경하는 것은 언제나 자기 자신이어야 한다는 OOP 관점에서 도메인 클래스에 updateMyAccount 기능이 있는 것이 맞는다고 생각합니다.**
+
+## 마무리
+최근 스프링을 6개월 가까이 하면서 제가 느낀 점들에 대해서 간단하게 정리했습니다. **아직 부족한 게 많아 Best Practices라도 당당하게 말하긴 어렵지만, 저와 같은 고민을 하시는 분들에게 조금이라도 도움이 되고 싶어 이렇게 정리했습니다.** 또 Step-02에서는 예외 처리와 유효성 검사에 대한 것을 정리할 예정입니다. 지속해서 해당 프로젝트를 이어 나아갈 예정이라 깃허브 start, watch 버튼을 누르시면 구독 신청받으실 수 있습니다. 저의 경험이 여러분에게 조금이라도 도움이 되기를 기원합니다.
