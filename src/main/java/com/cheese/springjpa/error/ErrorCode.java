@@ -1,12 +1,12 @@
 package com.cheese.springjpa.error;
 
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 public enum ErrorCode {
 
-    ACCOUNT_NOT_FOUND("AC_001", "해당 회원을 찾을 수 없습니다.", 404);
+    ACCOUNT_NOT_FOUND("AC_001", "해당 회원을 찾을 수 없습니다.", 404),
+    INPUT_VALUE_INVALID("???", "입력값이 올바르지 않습니다.", 400);
 
 
     private final String code;

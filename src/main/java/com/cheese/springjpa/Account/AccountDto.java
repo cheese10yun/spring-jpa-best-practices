@@ -1,6 +1,11 @@
 package com.cheese.springjpa.Account;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class AccountDto {
 
@@ -8,12 +13,21 @@ public class AccountDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SignUpReq {
+
+        @Email
         private String email;
+        @NotEmpty
         private String fistName;
+        @NotEmpty
         private String lastName;
+
         private String password;
+
+        @NotEmpty
         private String address1;
+        @NotEmpty
         private String address2;
+        @NotEmpty
         private String zip;
 
         @Builder

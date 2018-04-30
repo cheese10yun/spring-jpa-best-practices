@@ -1,13 +1,11 @@
 package com.cheese.springjpa.error;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
@@ -24,10 +22,19 @@ public class ErrorResponse {
         this.errors = errors;
     }
 
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class FieldError {
-        private String propertyPath;
-        private String inValidValue;
-        private String message;
+        private String field;
+        private String value;
+        private String reason;
+
+        @Builder
+        public FieldError(String field, String value, String reason) {
+            this.field = field;
+            this.value = value;
+            this.reason = reason;
+        }
     }
 
 }
