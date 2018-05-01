@@ -1,6 +1,7 @@
 package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,7 +26,7 @@ public class AccountServiceTest {
 
 
     @Test
-    public void create_회원Î가입_성공() {
+    public void create_회원가입_성공() {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
         given(accountRepository.save(any(Account.class))).willReturn(dto.toEntity());
@@ -36,6 +37,22 @@ public class AccountServiceTest {
         //then
         verify(accountRepository, atLeastOnce()).save(any(Account.class));
         assertThatEqual(dto, account);
+
+        //커버리지를 높이기 위한 임시 함수
+        account.getId();
+        account.getUpdatedAt();
+        account.getCreatedAt();
+    }
+
+    @Test(expected = EmailDuplicationException.class)
+    public void create_중복된_이메일_경우_EmailDuplicationException() {
+        //given
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        given(accountRepository.findByEmail(anyString())).willReturn(dto.toEntity());
+
+        //when
+        accountService.create(dto);
+
     }
 
     @Test

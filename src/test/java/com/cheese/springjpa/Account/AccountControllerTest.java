@@ -1,18 +1,27 @@
 package com.cheese.springjpa.Account;
 
+import com.cheese.springjpa.Account.exception.AccountNotFoundException;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.error.ErrorCode;
+import com.cheese.springjpa.error.ErrorExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.validation.ConstraintViolationException;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.empty;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
@@ -36,7 +45,9 @@ public class AccountControllerTest {
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(accountController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(accountController)
+                .setControllerAdvice(new ErrorExceptionController())
+                .build();
     }
 
     @Test
@@ -60,6 +71,88 @@ public class AccountControllerTest {
     }
 
     @Test
+    public void signUp_이메일형식_유효하지않을경우_() throws Exception {
+        //given
+        final AccountDto.SignUpReq dto = AccountDto.SignUpReq.builder()
+                .address1("서울")
+                .address2("성동구")
+                .zip("052-2344")
+                .email("emailtest.com")
+                .fistName("남윤")
+                .lastName("김")
+                .password("password111")
+                .build();
+        given(accountService.create(any())).willReturn(dto.toEntity());
+
+        //when
+        final ResultActions resultActions = requestSignUp(dto);
+
+        //then
+        resultActions
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(ErrorCode.INPUT_VALUE_INVALID.getMessage())))
+                .andExpect(jsonPath("$.code", is(ErrorCode.INPUT_VALUE_INVALID.getCode())))
+                .andExpect(jsonPath("$.status", is(ErrorCode.INPUT_VALUE_INVALID.getStatus())))
+                .andExpect(jsonPath("$.errors[0].field", is("email")))
+                .andExpect(jsonPath("$.errors[0].value", is(dto.getEmail())));
+    }
+
+
+    @Test
+    public void signUp_이메일형식_이미존재하는경우() throws Exception {
+        //given
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        given(accountService.create(any())).willThrow(EmailDuplicationException.class);
+
+        //when
+        final ResultActions resultActions = requestSignUp(dto);
+
+        //then
+        resultActions
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(ErrorCode.EMAIL_DUPLICATION.getMessage())))
+                .andExpect(jsonPath("$.code", is(ErrorCode.EMAIL_DUPLICATION.getCode())))
+                .andExpect(jsonPath("$.status", is(ErrorCode.EMAIL_DUPLICATION.getStatus())));
+    }
+
+
+    @Test
+    public void signUp_데이터_무결성_예외() throws Exception {
+        //given
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        given(accountService.create(any())).willThrow(DataIntegrityViolationException.class);
+
+        //when
+        final ResultActions resultActions = requestSignUp(dto);
+
+        //then
+        resultActions
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(ErrorCode.INPUT_VALUE_INVALID.getMessage())))
+                .andExpect(jsonPath("$.code", is(ErrorCode.INPUT_VALUE_INVALID.getCode())))
+                .andExpect(jsonPath("$.status", is(ErrorCode.INPUT_VALUE_INVALID.getStatus())));
+    }
+
+    @Test
+    @Ignore // 임시
+    public void signUp_데이터_무결성_예외2() throws Exception {
+        //given
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        given(accountService.create(any())).willThrow(ConstraintViolationException.class);
+
+        //when
+        final ResultActions resultActions = requestSignUp(dto);
+
+        //then
+        resultActions
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is(ErrorCode.INPUT_VALUE_INVALID.getMessage())))
+                .andExpect(jsonPath("$.code", is(ErrorCode.INPUT_VALUE_INVALID.getCode())))
+                .andExpect(jsonPath("$.status", is(ErrorCode.INPUT_VALUE_INVALID.getStatus())));
+    }
+
+
+    @Test
     public void getUser() throws Exception {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
@@ -78,6 +171,26 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
     }
+
+    @Test
+    public void getUser_존재하지_않은_경우() throws Exception {
+        //given
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        given(accountService.findById(anyLong())).willThrow(AccountNotFoundException.class);
+
+        //when
+        final ResultActions resultActions = requestGetUser();
+
+        //then
+        resultActions
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message", is(ErrorCode.ACCOUNT_NOT_FOUND.getMessage())))
+                .andExpect(jsonPath("$.code", is(ErrorCode.ACCOUNT_NOT_FOUND.getCode())))
+                .andExpect(jsonPath("$.status", is(ErrorCode.ACCOUNT_NOT_FOUND.getStatus())))
+                .andExpect(jsonPath("$.errors", is(empty())));
+    }
+
+
 
     @Test
     public void updateMyAccount() throws Exception {
