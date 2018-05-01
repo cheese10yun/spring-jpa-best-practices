@@ -1,7 +1,7 @@
 package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.error.ErrorCode;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

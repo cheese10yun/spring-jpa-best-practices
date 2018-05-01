@@ -1,8 +1,9 @@
 package com.cheese.springjpa.error;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -12,7 +13,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -20,27 +25,23 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ErrorController {
 
-
-    // TODO: 2018. 5. 1. 빈등록 시켜놓을것 -yun
-    private final ObjectMapper mapper = new ObjectMapper();
-
     @ExceptionHandler(value = {
             AccountNotFoundException.class
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ErrorResponse handleAccountNotFoundException(RuntimeException ex) {
-        log.error(ErrorCode.ACCOUNT_NOT_FOUND.getMessage());
+    protected ErrorResponse handleAccountNotFoundException(RuntimeException e) {
+        log.error(e.getMessage());
         return buildError(ErrorCode.ACCOUNT_NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error(ErrorCode.INPUT_VALUE_INVALID.getMessage());
+        log.error(e.getMessage());
         final BindingResult bindingResult = e.getBindingResult();
         final List<FieldError> errors = bindingResult.getFieldErrors();
 
-        return buildFieldError(
+        return buildFieldErrors(
                 ErrorCode.INPUT_VALUE_INVALID,
                 errors.parallelStream()
                         .map(error -> ErrorResponse.FieldError.builder()
@@ -48,7 +49,50 @@ public class ErrorController {
                                 .field(error.getField())
                                 .value((String) error.getRejectedValue())
                                 .build())
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList())
+        );
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handleConstraintViolationException(ConstraintViolationException e) {
+        log.error(e.getMessage());
+        final Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+
+        return buildFieldErrors(
+                ErrorCode.INPUT_VALUE_INVALID,
+                constraintViolations.parallelStream()
+                        .map(error -> ErrorResponse.FieldError.builder()
+                                .reason(error.getMessage())
+                                .value(error.getInvalidValue().toString())
+                                .field(error.getPropertyPath().toString())
+                                .build())
+                        .collect(Collectors.toList())
+        );
+    }
+
+
+    @ExceptionHandler(EmailDuplicationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handleConstraintViolationException(EmailDuplicationException e) {
+        final ErrorCode errorCode = ErrorCode.EMAIL_DUPLICATION;
+        log.error(errorCode.getMessage(), e.getEmail());
+
+        List<ErrorResponse.FieldError> errors = new ArrayList<>();
+        errors.add(ErrorResponse.FieldError.builder()
+                .value(e.getEmail())
+                .reason(errorCode.getMessage())
+                .field(e.getField())
+                .build());
+
+        return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, errors);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        log.error(e.getMessage());
+        return buildError(ErrorCode.INPUT_VALUE_INVALID);
     }
 
 
@@ -60,7 +104,7 @@ public class ErrorController {
                 .build();
     }
 
-    private ErrorResponse buildFieldError(ErrorCode errorCode, List<ErrorResponse.FieldError> errors) {
+    private ErrorResponse buildFieldErrors(ErrorCode errorCode, List<ErrorResponse.FieldError> errors) {
         return ErrorResponse.builder()
                 .code(errorCode.getCode())
                 .status(errorCode.getStatus())

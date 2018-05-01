@@ -16,17 +16,22 @@ public class AccountDto {
 
         @Email
         private String email;
+
         @NotEmpty
         private String fistName;
+
         @NotEmpty
         private String lastName;
 
+        @NotEmpty
         private String password;
 
         @NotEmpty
         private String address1;
+
         @NotEmpty
         private String address2;
+
         @NotEmpty
         private String zip;
 
