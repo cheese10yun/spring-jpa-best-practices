@@ -106,20 +106,20 @@ public class ErrorExceptionController {
 @ExceptionHandler(MethodArgumentNotValidException.class)
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 protected ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-		log.error(e.getMessage());
-		final BindingResult bindingResult = e.getBindingResult();
-		final List<FieldError> errors = bindingResult.getFieldErrors();
+	log.error(e.getMessage());
+	final BindingResult bindingResult = e.getBindingResult();
+	final List<FieldError> errors = bindingResult.getFieldErrors();
 
 		return buildFieldErrors(
-						ErrorCode.INPUT_VALUE_INVALID,
-						errors.parallelStream()
-										.map(error -> ErrorResponse.FieldError.builder()
-														.reason(error.getDefaultMessage())
-														.field(error.getField())
-														.value((String) error.getRejectedValue())
-														.build())
-										.collect(Collectors.toList())
-		);
+			ErrorCode.INPUT_VALUE_INVALID,
+			errors.parallelStream()
+				.map(error -> ErrorResponse.FieldError.builder()
+								.reason(error.getDefaultMessage())
+								.field(error.getField())
+								.value((String) error.getRejectedValue())
+								.build())
+				.collect(Collectors.toList())
+	);
 }
 ```
 ### ErrorResponse
