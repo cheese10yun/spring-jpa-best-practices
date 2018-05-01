@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,14 +15,18 @@ public class ErrorResponse {
     private String message;
     private String code;
     private int status;
-    private List<FieldError> errors;
+    private List<FieldError> errors = new ArrayList<>();
 
     @Builder
     public ErrorResponse(String message, String code, int status, List<FieldError> errors) {
         this.message = message;
         this.code = code;
         this.status = status;
-        this.errors = errors;
+        this.errors = initErrors(errors);
+    }
+
+    private List<FieldError> initErrors(List<FieldError> errors) {
+        return (errors == null) ? new ArrayList<>() : errors;
     }
 
     @Getter

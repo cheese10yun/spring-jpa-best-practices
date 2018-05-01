@@ -1,6 +1,5 @@
 package com.cheese.springjpa.Account;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class AccountControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(accountController).build();
     }
 
@@ -137,7 +136,7 @@ public class AccountControllerTest {
                 .address1("서울")
                 .address2("성동구")
                 .zip("052-2344")
-                .email("email")
+                .email("email@test.com")
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
