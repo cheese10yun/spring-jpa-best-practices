@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -31,7 +27,7 @@ public class ErrorExceptionController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ErrorResponse handleAccountNotFoundException(AccountNotFoundException e) {
         final ErrorCode accountNotFound = ErrorCode.ACCOUNT_NOT_FOUND;
-        log.error(accountNotFound.getMessage(), e.getMessage());
+        log.error(accountNotFound.getMessage(), e.getId());
         return buildError(accountNotFound);
     }
 
@@ -54,23 +50,23 @@ public class ErrorExceptionController {
         );
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ErrorResponse handleConstraintViolationException(ConstraintViolationException e) {
-        log.error(e.getMessage());
-        final Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-
-        return buildFieldErrors(
-                ErrorCode.INPUT_VALUE_INVALID,
-                constraintViolations.parallelStream()
-                        .map(error -> ErrorResponse.FieldError.builder()
-                                .reason(error.getMessage())
-                                .value(error.getInvalidValue().toString())
-                                .field(error.getPropertyPath().toString())
-                                .build())
-                        .collect(Collectors.toList())
-        );
-    }
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    protected ErrorResponse handleConstraintViolationException(ConstraintViolationException e) {
+//        log.error(e.getMessage());
+//        final Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+//
+//        return buildFieldErrors(
+//                ErrorCode.INPUT_VALUE_INVALID,
+//                constraintViolations.parallelStream()
+//                        .map(error -> ErrorResponse.FieldError.builder()
+//                                .reason(error.getMessage())
+//                                .value(error.getInvalidValue().toString())
+//                                .field(error.getPropertyPath().toString())
+//                                .build())
+//                        .collect(Collectors.toList())
+//        );
+//    }
 
 
     @ExceptionHandler(EmailDuplicationException.class)
@@ -78,15 +74,7 @@ public class ErrorExceptionController {
     protected ErrorResponse handleConstraintViolationException(EmailDuplicationException e) {
         final ErrorCode errorCode = ErrorCode.EMAIL_DUPLICATION;
         log.error(errorCode.getMessage(), e.getEmail());
-
-        List<ErrorResponse.FieldError> errors = new ArrayList<>();
-        errors.add(ErrorResponse.FieldError.builder()
-                .value(e.getEmail())
-                .reason(errorCode.getMessage())
-                .field(e.getField())
-                .build());
-
-        return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, errors);
+        return buildError(errorCode);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
