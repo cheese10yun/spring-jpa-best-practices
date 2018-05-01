@@ -8,10 +8,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
@@ -26,7 +25,7 @@ public class AccountServiceTest {
 
 
     @Test
-    public void create_회원가입_성공() {
+    public void create_회원Î가입_성공() {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
         given(accountRepository.save(any(Account.class))).willReturn(dto.toEntity());
@@ -78,7 +77,19 @@ public class AccountServiceTest {
         assertThat(dto.getZip(), is(account.getZip()));
     }
 
+    @Test
+    public void isExistedEmail_존재하는이메일_ReturnTrue() {
+        //given
+        final AccountDto.SignUpReq signUpReq = buildSignUpReq();
+        given(accountRepository.findByEmail(anyString())).willReturn(signUpReq.toEntity());
 
+        //when
+        final boolean existedEmail = accountService.isExistedEmail(anyString());
+
+        //then
+        verify(accountRepository, atLeastOnce()).findByEmail(anyString());
+        assertThat(existedEmail, is(true));
+    }
 
     private AccountDto.MyAccountReq buildMyAccountReq() {
         return AccountDto.MyAccountReq.builder()

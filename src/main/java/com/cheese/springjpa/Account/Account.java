@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class Account {
     @GeneratedValue
     private long id;
 
+    @Email
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

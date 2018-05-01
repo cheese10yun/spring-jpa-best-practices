@@ -1,0 +1,22 @@
+{
+  "message": "입력값이 올바르지 않습니다.",
+  "code": "???",
+  "status": 400,
+  "errors": [
+    {
+      "field": "email",
+      "value": "string",
+      "reason": "이메일 주소가 유효하지 않습니다."
+    },
+    {
+      "field": "lastName",
+      "value": null,
+      "reason": "반드시 값이 존재하고 길이 혹은 크기가 0보다 커야 합니다."
+    },
+    {
+      "field": "fistName",
+      "value": null,
+      "reason": "반드시 값이 존재하고 길이 혹은 크기가 0보다 커야 합니다."
+    }
+  ]
+}
