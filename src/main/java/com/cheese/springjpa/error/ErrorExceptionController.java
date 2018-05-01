@@ -23,15 +23,16 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 @ResponseBody
 @Slf4j
-public class ErrorController {
+public class ErrorExceptionController {
 
     @ExceptionHandler(value = {
             AccountNotFoundException.class
     })
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ErrorResponse handleAccountNotFoundException(RuntimeException e) {
-        log.error(e.getMessage());
-        return buildError(ErrorCode.ACCOUNT_NOT_FOUND);
+    protected ErrorResponse handleAccountNotFoundException(AccountNotFoundException e) {
+        final ErrorCode accountNotFound = ErrorCode.ACCOUNT_NOT_FOUND;
+        log.error(accountNotFound.getMessage(), e.getMessage());
+        return buildError(accountNotFound);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

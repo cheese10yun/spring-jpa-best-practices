@@ -9,32 +9,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AccountDto {
 
-
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class SignUpReq {
-
         @Email
         private String email;
-
         @NotEmpty
         private String fistName;
-
         @NotEmpty
         private String lastName;
-
         @NotEmpty
         private String password;
-
         @NotEmpty
         private String address1;
-
         @NotEmpty
         private String address2;
-
         @NotEmpty
         private String zip;
-
         @Builder
         public SignUpReq(String email, String fistName, String lastName, String password, String address1, String address2, String zip) {
             this.email = email;

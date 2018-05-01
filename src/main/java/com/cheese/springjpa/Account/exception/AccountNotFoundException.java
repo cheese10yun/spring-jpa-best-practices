@@ -1,12 +1,13 @@
 package com.cheese.springjpa.Account.exception;
 
-import com.cheese.springjpa.error.ErrorCode;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 
-@Slf4j
+@Getter
 public class AccountNotFoundException extends RuntimeException {
 
+    private long id;
+
     public AccountNotFoundException(long id) {
-        super(ErrorCode.ACCOUNT_NOT_FOUND.getMessage() + id);
+        this.id = id;
     }
 }
