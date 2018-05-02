@@ -15,13 +15,13 @@ API을 개발하다 보면 프런트에서 넘어온 값에 대한 유효성 검
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public static class SignUpReq {
-	@Email
-	private String email;
-	@NotEmpty
-	private String fistName;
-	...
-	@NotEmpty
-	private String zip;
+    @Email
+    private String email;
+    @NotEmpty
+    private String fistName;
+    ...
+    @NotEmpty
+    private String zip;
 }
 ```
 이전 단계에서 작성한 회원가입을 위한 SignUpReq.class에 새롭게 추가된 `@Email`, `@NotEmpty` 어 로테이션을 추가했습니다. 이 밖에 다양한 어노테이션들이 있습니다. 아래의 컨트롤러에서  `@Valid` 어 로테이션을 통해서 유효성 검사 가를 진행하고 유효성 검사를 실패하면 `MethodArgumentNotValidException` 예외가 발생합니다.
