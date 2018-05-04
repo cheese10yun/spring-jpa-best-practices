@@ -1,4 +1,4 @@
-# Spring-Jpa Best Practices [![Build Status](https://travis-ci.org/cheese10yun/spring-jpa.svg?branch=master)](https://travis-ci.org/cheese10yun/spring-jpa) [![Coverage Status](https://coveralls.io/repos/github/cheese10yun/spring-jpa/badge.svg?branch=master)](https://coveralls.io/github/cheese10yun/spring-jpa?branch=master)
+# Spring-Jpa Best Practices [![Build Status](https://travis-ci.org/cheese10yun/spring-jpa-best-practices.svg?branch=master)](https://travis-ci.org/cheese10yun/spring-jpa-best-practices) [![Coverage Status](https://coveralls.io/repos/github/cheese10yun/spring-jpa/badge.svg?branch=master)](https://coveralls.io/github/cheese10yun/spring-jpa?branch=master)
 
 최근 스프링을 6개월 가까이 하면서 제가 느낀 점들에 대해서 간단하게 정리했습니다. **아직 부족한 게 많아 Best Practices라도 당당하게 말하긴 어렵지만, 저와 같은 고민을 하시는 분들에게 조금이라도 도움이 되고 싶어 이렇게 정리했습니다.** 지속해서 해당 프로젝트를 이어 나아갈 예정이라 깃허브 Start, Watching 버튼을 누르시면 구독 신청받으실 수 있습니다. 저의 경험이 여러분에게 조금이라도 도움이 되기를 기원합니다.
 
