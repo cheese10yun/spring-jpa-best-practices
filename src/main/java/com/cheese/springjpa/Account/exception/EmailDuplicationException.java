@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class EmailDuplicationException extends RuntimeException {
 
-    private String email;
+    private com.cheese.springjpa.Account.model.Email email;
     private String field;
 
-    public EmailDuplicationException(String email) {
+    public EmailDuplicationException(com.cheese.springjpa.Account.model.Email email) {
         this.field = "email";
         this.email = email;
     }

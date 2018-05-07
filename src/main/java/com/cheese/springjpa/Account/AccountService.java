@@ -36,7 +36,7 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public boolean isExistedEmail(String email) {
+    public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {
         return accountRepository.findByEmail(email) != null;
     }
 }

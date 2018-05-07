@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,9 +18,8 @@ public class Account {
     @GeneratedValue
     private long id;
 
-    @Email
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Embedded
+    private com.cheese.springjpa.Account.model.Email email;
 
     @Column(name = "first_name", nullable = false)
     private String fistName;
@@ -50,7 +48,7 @@ public class Account {
     private Date updatedAt;
 
     @Builder
-    public Account(String email, String fistName, String lastName, String password, String address1, String address2, String zip) {
+    public Account(com.cheese.springjpa.Account.model.Email email, String fistName, String lastName, String password, String address1, String address2, String zip) {
         this.email = email;
         this.fistName = fistName;
         this.lastName = lastName;

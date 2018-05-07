@@ -2,6 +2,7 @@ package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.error.ErrorCode;
 import com.cheese.springjpa.error.ErrorExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,6 +55,8 @@ public class AccountControllerTest {
     public void signUp() throws Exception {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
+
+        final String s = objectMapper.writeValueAsString(dto);
         given(accountService.create(any())).willReturn(dto.toEntity());
 
         //when
@@ -65,7 +68,7 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
                 .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
                 .andExpect(jsonPath("$.zip", is(dto.getZip())))
-                .andExpect(jsonPath("$.email", is(dto.getEmail())))
+                .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
     }
@@ -77,7 +80,7 @@ public class AccountControllerTest {
                 .address1("서울")
                 .address2("성동구")
                 .zip("052-2344")
-                .email("emailtest.com")
+                .email(buldEmail("emailtest.com"))
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
@@ -93,8 +96,8 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.message", is(ErrorCode.INPUT_VALUE_INVALID.getMessage())))
                 .andExpect(jsonPath("$.code", is(ErrorCode.INPUT_VALUE_INVALID.getCode())))
                 .andExpect(jsonPath("$.status", is(ErrorCode.INPUT_VALUE_INVALID.getStatus())))
-                .andExpect(jsonPath("$.errors[0].field", is("email")))
-                .andExpect(jsonPath("$.errors[0].value", is(dto.getEmail())));
+                .andExpect(jsonPath("$.errors[0].field", is("email.address")))
+                .andExpect(jsonPath("$.errors[0].value", is(dto.getEmail().getAddress())));
     }
 
 
@@ -167,7 +170,7 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
                 .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
                 .andExpect(jsonPath("$.zip", is(dto.getZip())))
-                .andExpect(jsonPath("$.email", is(dto.getEmail())))
+                .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
     }
@@ -189,7 +192,6 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.status", is(ErrorCode.ACCOUNT_NOT_FOUND.getStatus())))
                 .andExpect(jsonPath("$.errors", is(empty())));
     }
-
 
 
     @Test
@@ -249,10 +251,15 @@ public class AccountControllerTest {
                 .address1("서울")
                 .address2("성동구")
                 .zip("052-2344")
-                .email("email@test.com")
+                .email(buldEmail("email@test.com"))
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
                 .build();
     }
+
+    private Email buldEmail(final String email) {
+        return Email.builder().address(email).build();
+    }
+
 }
