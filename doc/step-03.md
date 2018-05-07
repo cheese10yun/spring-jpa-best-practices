@@ -1,5 +1,7 @@
 # step-03 : 효과적인 validate, 예외 처리 처리 (2) (작업중...)
 
+이전 포스팅의 단점을 해결해서 더 효과적은 효과적인 validate, 예외 처리 처리 작업을 진행해보겠습니다.
+
 ## [step-02 : 이전 포스팅의 단점](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-02.md)
 
 1. 모든 Request Dto에 대한 반복적인 유효성 검사의 어노테이션이 필요합니다.
