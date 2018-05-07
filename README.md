@@ -4,9 +4,10 @@
 
 
 ## 목차
- 1. [step-01 : Account 생성, 조회, 수정 API를 간단하게 만드는 예제](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-01.md)
- 2. [step-02 : 효과적인 validate, 예외 처리 (1)](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-02.md)
-3. step-03 : 효과적인 validate, 예외 처리 처리 (2) (작업중...)
+1. [step-01 : Account 생성, 조회, 수정 API를 간단하게 만드는 예제](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-01.md)
+2. [step-02 : 효과적인 validate, 예외 처리 (1)](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-02.md)
+3. [step-03 : 효과적인 validate, 예외 처리 처리 (2)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-03.md)
+4. [step-04 : Embedded를 이용한 Password 처리]()
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 
