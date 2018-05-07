@@ -2,6 +2,7 @@ package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.model.Email;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -11,7 +12,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
@@ -48,7 +50,7 @@ public class AccountServiceTest {
     public void create_중복된_이메일_경우_EmailDuplicationException() {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
-        given(accountRepository.findByEmail(anyString())).willReturn(dto.toEntity());
+        given(accountRepository.findByEmail(any())).willReturn(dto.toEntity());
 
         //when
         accountService.create(dto);
@@ -98,13 +100,13 @@ public class AccountServiceTest {
     public void isExistedEmail_존재하는이메일_ReturnTrue() {
         //given
         final AccountDto.SignUpReq signUpReq = buildSignUpReq();
-        given(accountRepository.findByEmail(anyString())).willReturn(signUpReq.toEntity());
+        given(accountRepository.findByEmail(any())).willReturn(signUpReq.toEntity());
 
         //when
-        final boolean existedEmail = accountService.isExistedEmail(anyString());
+        final boolean existedEmail = accountService.isExistedEmail(any());
 
         //then
-        verify(accountRepository, atLeastOnce()).findByEmail(anyString());
+        verify(accountRepository, atLeastOnce()).findByEmail(any());
         assertThat(existedEmail, is(true));
     }
 
@@ -131,10 +133,14 @@ public class AccountServiceTest {
                 .address1("서울")
                 .address2("성동구")
                 .zip("052-2344")
-                .email("email")
+                .email(buldEmail("email"))
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
                 .build();
+    }
+
+    private Email buldEmail(final String email) {
+        return Email.builder().address(email).build();
     }
 }
