@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -34,8 +33,7 @@ public class Password {
     }
 
     public boolean isMatched(final String rawPassword) {
-        final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder.matches(rawPassword, this.value);
+        return new BCryptPasswordEncoder().matches(rawPassword, this.value);
     }
 
     public boolean isExpiration() {
