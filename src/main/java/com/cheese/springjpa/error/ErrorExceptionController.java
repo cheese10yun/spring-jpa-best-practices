@@ -2,6 +2,7 @@ package com.cheese.springjpa.error;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.exception.PasswordFailedExceededException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -82,6 +83,13 @@ public class ErrorExceptionController {
     protected ErrorResponse handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         log.error(e.getMessage());
         return buildError(ErrorCode.INPUT_VALUE_INVALID);
+    }
+
+    @ExceptionHandler(PasswordFailedExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handlePasswordFailedExceededException(PasswordFailedExceededException e) {
+        log.error(e.getMessage());
+        return buildError(e.getErrorCode());
     }
 
 

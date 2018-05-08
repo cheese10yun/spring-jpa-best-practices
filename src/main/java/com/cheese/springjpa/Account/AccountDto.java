@@ -1,5 +1,6 @@
 package com.cheese.springjpa.Account;
 
+import com.cheese.springjpa.Account.model.Password;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,14 +21,16 @@ public class AccountDto {
         private String fistName;
         @NotEmpty
         private String lastName;
-        @NotEmpty
+
         private String password;
+
         @NotEmpty
         private String address1;
         @NotEmpty
         private String address2;
         @NotEmpty
         private String zip;
+
         @Builder
         public SignUpReq(com.cheese.springjpa.Account.model.Email email, String fistName, String lastName, String password, String address1, String address2, String zip) {
             this.email = email;
@@ -44,7 +47,7 @@ public class AccountDto {
                     .email(this.email)
                     .fistName(this.fistName)
                     .lastName(this.lastName)
-                    .password(this.password)
+                    .password(Password.builder().value(password).build())
                     .address1(this.address1)
                     .address2(this.address2)
                     .zip(this.zip)
@@ -72,6 +75,7 @@ public class AccountDto {
     @Getter
     public static class Res {
         private com.cheese.springjpa.Account.model.Email email;
+        private Password password;
         private String fistName;
         private String lastName;
         private String address1;
@@ -85,6 +89,7 @@ public class AccountDto {
             this.address1 = account.getAddress1();
             this.address2 = account.getAddress2();
             this.zip = account.getZip();
+            this.password = account.getPassword();
         }
     }
 }

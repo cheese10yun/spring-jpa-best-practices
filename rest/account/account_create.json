@@ -1,0 +1,10 @@
+{
+  "address1": "string",
+  "address2": "string",
+  "email": {
+    "address": "string"
+  },
+  "fistName": "string",
+  "lastName": "string",
+  "zip": "string"
+}

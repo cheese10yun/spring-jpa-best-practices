@@ -1,9 +1,8 @@
 package com.cheese.springjpa.Account;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.cheese.springjpa.Account.model.Email;
+import com.cheese.springjpa.Account.model.Password;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +11,8 @@ import java.util.Date;
 @Table(name = "account")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
+@ToString
 public class Account {
 
     @Id
@@ -27,8 +28,8 @@ public class Account {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Embedded
+    private Password password;
 
     @Column(name = "address1", nullable = false)
     private String address1;
@@ -48,7 +49,7 @@ public class Account {
     private Date updatedAt;
 
     @Builder
-    public Account(com.cheese.springjpa.Account.model.Email email, String fistName, String lastName, String password, String address1, String address2, String zip) {
+    public Account(Email email, String fistName, String lastName, Password password, String address1, String address2, String zip) {
         this.email = email;
         this.fistName = fistName;
         this.lastName = lastName;
@@ -57,6 +58,7 @@ public class Account {
         this.address2 = address2;
         this.zip = zip;
     }
+
 
     public void updateMyAccount(AccountDto.MyAccountReq dto) {
         this.address1 = dto.getAddress1();
