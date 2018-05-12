@@ -11,7 +11,6 @@ public enum ErrorCode {
     PASSWORD_FAILED_EXCEEDED("???", "비밀번호 실패 횟수가 초과했습니다.", 400);
 
 
-
     private final String code;
     private final String message;
     private final int status;

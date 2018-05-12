@@ -2,7 +2,7 @@
   "address1": "string",
   "address2": "string",
   "email": {
-    "address": "string"
+    "address": "string@test.com"
   },
   "fistName": "string",
   "lastName": "string",

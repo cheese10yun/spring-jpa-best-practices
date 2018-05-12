@@ -9,8 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
 
 @Embeddable
 @Getter
@@ -21,44 +21,67 @@ public class Password {
     private String value;
 
     @Column(name = "password_expiration_date")
-    private Timestamp expirationDate;
+    private LocalDateTime expirationDate;
 
     @Column(name = "password_failed_count", nullable = false)
     private int failedCount;
 
+    @Column(name = "password_ttl")
+    private long ttl;
+
     @Builder
     public Password(final String value) {
+        this.ttl = 1209_604; // 1209_604 is 14 days
         this.value = encodePassword(value);
-        this.expirationDate = calculateExpirationDate(3);
+        this.expirationDate = extendExpirationDate();
     }
 
     public boolean isMatched(final String rawPassword) {
-        return new BCryptPasswordEncoder().matches(rawPassword, this.value);
+        if (failedCount >= 5)
+            throw new PasswordFailedExceededException();
+
+        final boolean matches = isMatches(rawPassword);
+        updateFailedCount(matches);
+        return matches;
     }
+
+    public void changePassword(final String newPassword, final String oldPassword) {
+        if (isMatched(oldPassword)) {
+            value = encodePassword(newPassword);
+            extendExpirationDate();
+        }
+    }
+
 
     public boolean isExpiration() {
-        return System.currentTimeMillis() > expirationDate.getTime();
+        return LocalDateTime.now().isAfter(expirationDate);
     }
 
-    public void resetFailedCount() {
-        this.failedCount = 0;
+    private LocalDateTime extendExpirationDate() {
+        return LocalDateTime.now().plusSeconds(ttl);
     }
-
-    public void increaseFailCount() {
-        this.failedCount++;
-
-        if (failedCount > 5)
-            throw new PasswordFailedExceededException();
-    }
-
-    private Timestamp calculateExpirationDate(int plusMonth) {
-        return Timestamp.valueOf(LocalDateTime.now().plusMonths(plusMonth));
-    }
-
 
     private String encodePassword(final String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
 
+    private void updateFailedCount(boolean matches) {
+        if (matches)
+            resetFailedCount();
+        else
+            increaseFailCount();
+    }
+
+    private void resetFailedCount() {
+        this.failedCount = 0;
+    }
+
+    private void increaseFailCount() {
+        this.failedCount++;
+    }
+
+    private boolean isMatches(String rawPassword) {
+        return new BCryptPasswordEncoder().matches(rawPassword, this.value);
+    }
 
 }

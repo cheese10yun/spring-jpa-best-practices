@@ -6,11 +6,16 @@ spring:
 ---
 spring:
   profiles: local
+
   jpa:
     database: h2
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
 
 logging:
   level:
