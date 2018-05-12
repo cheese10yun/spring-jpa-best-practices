@@ -57,7 +57,10 @@ public class Password {
 }
 ```
 
-객체의 변경이나 질의는 반드시 해당 객체에 의해서 이루어져야 합니다. 위의 요구 사항을 만족하는 로직들은 Password 객체 안에 있고 Password 객체를 통해서 모든 작업들이 이루어집니다. 그래서 결과적으로 Password 관련 테스트 코드도 작성하기 쉬워진다고 생각합니다. 이렇게 작은 단위로 테스트 코드를 작성하면 실패했을 때 원인도 찾기 쉬워집니다. 결과적으로 Password의 책임이 명확해진다고 생각합니다. 또 Password를 분리한 이유는 Embeddable 타입으로 분리하지 않았을 경우에는 해당 로직들은 모두 Account 클래스에 들어가 Account 책임이 증가하는 것을 방지할 수 있습니다.
+**객체의 변경이나 질의는 반드시 해당 객체에 의해서 이루어져야 하는데 위의 요구 사항을 만족하는 로직들은 Password 객체 안에 있고 Password 객체를 통해서 모든 작업들이 이루어집니다.** 그래서 결과적으로 Password 관련 테스트 코드도 작성하기 쉬워지고 이렇게 작은 단위로 테스트 코드를 작성하면 실패했을 때 원인도 찾기 쉬워집니다.
+
+결과적으로 Password의 책임이 명확해집니다. 만약 Embeddable 타입으로 분리하지 않았을 경우에는 해당 로직들은 모두 Account 클래스에 들어가 Account 책임이 증가하는 것을 방지할 수 있습니다.
+
 
 ## 소소한 팁
 * 날짜 관련 클래스는 LocalDateTime 사용하였습니다. 설정 방법은 [링크](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/appendix-01.md)에서 확인해주세요

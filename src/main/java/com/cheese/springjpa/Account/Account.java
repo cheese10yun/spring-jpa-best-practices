@@ -2,7 +2,10 @@ package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.Account.model.Password;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,8 +14,6 @@ import java.util.Date;
 @Table(name = "account")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Setter
-@ToString
 public class Account {
 
     @Id
