@@ -85,6 +85,15 @@ public class ErrorExceptionController {
     }
 
 
+    // TODO: 2018. 5. 12. 비밀번호 변경 컨트롤러 생성시 주석 해제할것 -yun
+//    @ExceptionHandler(PasswordFailedExceededException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    protected ErrorResponse handlePasswordFailedExceededException(PasswordFailedExceededException e) {
+//        log.error(e.getMessage());
+//        return buildError(e.getErrorCode());
+//    }
+
+
     private ErrorResponse buildError(ErrorCode errorCode) {
         return ErrorResponse.builder()
                 .code(errorCode.getCode())

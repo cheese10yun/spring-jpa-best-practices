@@ -125,7 +125,6 @@ public class AccountServiceTest {
         assertThat(signUpReq.getEmail(), is(account.getEmail()));
         assertThat(signUpReq.getFistName(), is(account.getFistName()));
         assertThat(signUpReq.getLastName(), is(account.getLastName()));
-        assertThat(signUpReq.getPassword(), is(account.getPassword()));
     }
 
     private AccountDto.SignUpReq buildSignUpReq() {

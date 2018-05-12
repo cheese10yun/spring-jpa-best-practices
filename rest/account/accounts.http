@@ -1,0 +1,20 @@
+#Account Request
+
+## Account 조회
+GET http://localhost:8080/accounts/1
+Content-Type: application/json
+###
+
+## Account 생성
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+< ./account_create.json
+###
+
+## Account  수정
+PUT http://localhost:8080/accounts/1
+Content-Type: application/json
+
+< ./account_update.json
+###
