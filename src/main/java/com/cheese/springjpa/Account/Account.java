@@ -3,6 +3,7 @@ package com.cheese.springjpa.Account;
 import com.cheese.springjpa.Account.model.Address;
 import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.Account.model.Password;
+import com.cheese.springjpa.common.model.DateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,13 +37,8 @@ public class Account {
     @Embedded
     private Address address;
 
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @Embedded
+    private DateTime dateTime;
 
     @Builder
     public Account(Email email, String fistName, String lastName, Password password, Address address) {
