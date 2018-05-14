@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("orders")
+@RequestMapping("deliveries")
 @AllArgsConstructor
 public class DeliveryController {
 
@@ -17,14 +17,21 @@ public class DeliveryController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Delivery signUp(@RequestBody @Valid final Delivery delivery) {
-        return deliveryService.create(delivery);
+    public DeliveryDto.Res create(@RequestBody @Valid final DeliveryDto.CreationReq dto) {
+        return new DeliveryDto.Res(deliveryService.create(dto));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public Delivery getUser(@PathVariable final long id) {
-        return deliveryService.findById(id);
+    public DeliveryDto.Res getDelivery(@PathVariable final long id) {
+        return new DeliveryDto.Res(deliveryService.findById(id));
+    }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public DeliveryDto.Res updateDelivery(@PathVariable final long id, @RequestBody DeliveryDto.UpdateReq dto) {
+        return new DeliveryDto.Res(deliveryService.updateStatus(id, dto));
     }
 
 }

@@ -1,8 +1,6 @@
 package com.cheese.springjpa.delivery;
 
 import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.delivery.log.DeliveryLog;
-import com.cheese.springjpa.delivery.log.DeliveryStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class DeliveryRepositoryTest {
 
         final Delivery delivery = buildOrder();
 
-        final DeliveryLog deliveryLog1 = buildOrderLog(delivery, DeliveryStatus.CANCEL);
+        final DeliveryLog deliveryLog1 = buildOrderLog(delivery, DeliveryStatus.CANCELED);
         final DeliveryLog deliveryLog2 = buildOrderLog(delivery, DeliveryStatus.PENDING);
         final DeliveryLog deliveryLog3 = buildOrderLog(delivery, DeliveryStatus.PENDING);
 

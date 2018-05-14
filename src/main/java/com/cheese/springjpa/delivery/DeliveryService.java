@@ -1,7 +1,6 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.delivery.log.DeliveryLog;
-import com.cheese.springjpa.delivery.log.DeliveryStatus;
+import com.cheese.springjpa.delivery.exception.DeliveryNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +13,25 @@ public class DeliveryService {
 
     private DeliveryRepository deliveryRepository;
 
-    public Delivery create(Delivery delivery) {
-
-
-        final DeliveryLog deliveryLog1 = buildOrderLog(delivery, DeliveryStatus.CANCEL);
-        final DeliveryLog deliveryLog2 = buildOrderLog(delivery, DeliveryStatus.CANCEL);
-
-        delivery.getLogs().add(deliveryLog1);
-        delivery.getLogs().add(deliveryLog2);
-
+    public Delivery create(DeliveryDto.CreationReq dto) {
+        final Delivery delivery = dto.toEntity();
+        final DeliveryLog log = buildOrderLog(delivery, DeliveryStatus.PENDING);
+        delivery.getLogs().add(log);
         return deliveryRepository.save(delivery);
     }
 
+    public Delivery updateStatus(long id, DeliveryDto.UpdateReq dto) {
+        final Delivery delivery = findById(id);
+        final DeliveryLog log = buildOrderLog(delivery, dto.getStatus());
+        delivery.getLogs().add(log);
+        return delivery;
+    }
 
 
     public Delivery findById(long id) {
-        return deliveryRepository.findOne(id);
+        final Delivery delivery = deliveryRepository.findOne(id);
+        if (delivery == null) throw new DeliveryNotFoundException(id);
+        return delivery;
     }
 
 
@@ -39,4 +41,5 @@ public class DeliveryService {
                 .status(status)
                 .build();
     }
+
 }
