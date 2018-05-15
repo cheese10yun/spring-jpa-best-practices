@@ -36,7 +36,6 @@ public class DeliveryDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class UpdateReq {
-
         private DeliveryStatus status;
 
         @Builder

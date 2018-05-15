@@ -41,7 +41,6 @@ public class DeliveryLog {
 
     @Builder
     public DeliveryLog(final DeliveryStatus status, final Delivery delivery) {
-        verifyDelivery(delivery);
         verifyStatus(status, delivery);
         setStatus(status);
         this.delivery = delivery;
@@ -90,29 +89,15 @@ public class DeliveryLog {
     }
 
     private void completed() {
-        verifyCompleted();
         this.status = DeliveryStatus.COMPLETED;
     }
 
     private void delivering() {
-        verifyDelivering();
         this.status = DeliveryStatus.DELIVERING;
-    }
-
-    private void verifyDelivering() {
-        if (isPending()) throw new IllegalStateException("To change to delivering, it must be pending.");
-    }
-
-    private void verifyCompleted() {
-        if (!isDelivering()) throw new IllegalStateException("To change to completed, it must be delivering.");
     }
 
     private void verifyNotYetDelivering() {
         if (isNotYetDelivering()) throw new DeliveryAlreadyDeliveringException();
-    }
-
-    private void verifyDelivery(Delivery delivery) {
-        if (delivery == null) throw new DeliveryNotFoundException();
     }
 
     private boolean isNotYetDelivering() {
@@ -126,14 +111,6 @@ public class DeliveryLog {
 
     private void verifyLastStatusEquals(DeliveryStatus status) {
         if (lastStatus == status) throw new DeliveryStatusEqaulsException(lastStatus);
-    }
-
-    private boolean isPending() {
-        return lastStatus == DeliveryStatus.PENDING;
-    }
-
-    private boolean isDelivering() {
-        return lastStatus == DeliveryStatus.DELIVERING;
     }
 
     private boolean isCompleted() {

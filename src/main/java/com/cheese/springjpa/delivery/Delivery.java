@@ -33,4 +33,19 @@ public class Delivery {
     public Delivery(Address address) {
         this.address = address;
     }
+
+
+    public void addLog(DeliveryStatus status) {
+        logs.add(DeliveryLog.builder()
+                .status(status)
+                .delivery(this)
+                .build());
+    }
+
+    private void buildLog(DeliveryStatus status) {
+        DeliveryLog.builder()
+                .status(status)
+                .delivery(this)
+                .build();
+    }
 }
