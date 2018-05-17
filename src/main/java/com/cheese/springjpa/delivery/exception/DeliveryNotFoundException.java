@@ -13,7 +13,4 @@ public class DeliveryNotFoundException extends RuntimeException {
         this.id = id;
     }
 
-    public DeliveryNotFoundException() {
-        super("Delivery is Null");
-    }
 }

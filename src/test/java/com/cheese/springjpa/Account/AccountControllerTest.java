@@ -56,8 +56,6 @@ public class AccountControllerTest {
     public void signUp() throws Exception {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
-
-        final String s = objectMapper.writeValueAsString(dto);
         given(accountService.create(any())).willReturn(dto.toEntity());
 
         //when

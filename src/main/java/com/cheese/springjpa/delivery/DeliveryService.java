@@ -15,15 +15,13 @@ public class DeliveryService {
 
     public Delivery create(DeliveryDto.CreationReq dto) {
         final Delivery delivery = dto.toEntity();
-        final DeliveryLog log = buildOrderLog(delivery, DeliveryStatus.PENDING);
-        delivery.getLogs().add(log);
+        delivery.addLog(DeliveryStatus.PENDING);
         return deliveryRepository.save(delivery);
     }
 
     public Delivery updateStatus(long id, DeliveryDto.UpdateReq dto) {
         final Delivery delivery = findById(id);
-        final DeliveryLog log = buildOrderLog(delivery, dto.getStatus());
-        delivery.getLogs().add(log);
+        delivery.addLog(dto.getStatus());
         return delivery;
     }
 
@@ -35,11 +33,5 @@ public class DeliveryService {
     }
 
 
-    private DeliveryLog buildOrderLog(final Delivery delivery, final DeliveryStatus status) {
-        return DeliveryLog.builder()
-                .delivery(delivery)
-                .status(status)
-                .build();
-    }
 
 }

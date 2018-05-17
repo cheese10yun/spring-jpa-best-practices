@@ -2,7 +2,6 @@ package com.cheese.springjpa.delivery;
 
 import com.cheese.springjpa.common.model.DateTime;
 import com.cheese.springjpa.delivery.exception.DeliveryAlreadyDeliveringException;
-import com.cheese.springjpa.delivery.exception.DeliveryNotFoundException;
 import com.cheese.springjpa.delivery.exception.DeliveryStatusEqaulsException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;

@@ -36,14 +36,11 @@ public class Delivery {
 
 
     public void addLog(DeliveryStatus status) {
-        logs.add(DeliveryLog.builder()
-                .status(status)
-                .delivery(this)
-                .build());
+        this.logs.add(buildLog(status));
     }
 
-    private void buildLog(DeliveryStatus status) {
-        DeliveryLog.builder()
+    private DeliveryLog buildLog(DeliveryStatus status) {
+        return DeliveryLog.builder()
                 .status(status)
                 .delivery(this)
                 .build();

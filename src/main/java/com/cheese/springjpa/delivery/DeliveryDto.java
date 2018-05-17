@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embedded;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
