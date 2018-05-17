@@ -8,7 +8,8 @@
 2. [step-02 : 효과적인 validate, 예외 처리 (1)](https://github.com/cheese10yun/spring-jpa/blob/master/doc/step-02.md)
 3. [step-03 : 효과적인 validate, 예외 처리 처리 (2)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-03.md)
 4. [step-04 : Embedded를 이용한 Password 처리](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-04.md)
-5. [step-05: OneToMany 관계 설정 팁(작업중...)]()
+5. [step-05: OneToMany 관계 설정 팁](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-05.md)
+6. [step-05: Setter 사용하지 않기]()
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 

@@ -2,6 +2,7 @@ package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.model.Address;
 import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.error.ErrorCode;
 import com.cheese.springjpa.error.ErrorExceptionController;
@@ -55,8 +56,6 @@ public class AccountControllerTest {
     public void signUp() throws Exception {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
-
-        final String s = objectMapper.writeValueAsString(dto);
         given(accountService.create(any())).willReturn(dto.toEntity());
 
         //when
@@ -65,9 +64,9 @@ public class AccountControllerTest {
         //then
         resultActions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
-                .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
-                .andExpect(jsonPath("$.zip", is(dto.getZip())))
+                .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
+                .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
+                .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())))
                 .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
@@ -77,10 +76,8 @@ public class AccountControllerTest {
     public void signUp_이메일형식_유효하지않을경우_() throws Exception {
         //given
         final AccountDto.SignUpReq dto = AccountDto.SignUpReq.builder()
-                .address1("서울")
-                .address2("성동구")
-                .zip("052-2344")
-                .email(buldEmail("emailtest.com"))
+                .address(buildAddress("서울", "성동구", "052-2344"))
+                .email(buildEmail("emailtest.com"))
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
@@ -167,9 +164,9 @@ public class AccountControllerTest {
         //then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
-                .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
-                .andExpect(jsonPath("$.zip", is(dto.getZip())))
+                .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
+                .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
+                .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())))
                 .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
@@ -199,9 +196,7 @@ public class AccountControllerTest {
         //given
         final AccountDto.MyAccountReq dto = buildMyAccountReq();
         final Account account = Account.builder()
-                .address1(dto.getAddress1())
-                .address2(dto.getAddress2())
-                .zip(dto.getZip())
+                .address(dto.getAddress())
                 .build();
 
         given(accountService.updateMyAccount(anyLong(), any(AccountDto.MyAccountReq.class))).willReturn(account);
@@ -212,9 +207,9 @@ public class AccountControllerTest {
         //then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.address1", is(dto.getAddress1())))
-                .andExpect(jsonPath("$.address2", is(dto.getAddress2())))
-                .andExpect(jsonPath("$.zip", is(dto.getZip())));
+                .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
+                .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
+                .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())));
 
     }
 
@@ -227,9 +222,11 @@ public class AccountControllerTest {
 
     private AccountDto.MyAccountReq buildMyAccountReq() {
         return AccountDto.MyAccountReq.builder()
-                .address1("주소수정")
-                .address2("주소수정2")
-                .zip("061-233-444")
+                .address(Address.builder()
+                        .address1("주소수정")
+                        .address2("주소수정2")
+                        .zip("061-233-444")
+                        .build())
                 .build();
     }
 
@@ -248,18 +245,26 @@ public class AccountControllerTest {
 
     private AccountDto.SignUpReq buildSignUpReq() {
         return AccountDto.SignUpReq.builder()
-                .address1("서울")
-                .address2("성동구")
-                .zip("052-2344")
-                .email(buldEmail("email@test.com"))
+                .address(buildAddress("서울", "성동구", "052-2344"))
+                .email(buildEmail("email@test.com"))
                 .fistName("남윤")
                 .lastName("김")
                 .password("password111")
                 .build();
     }
 
-    private Email buldEmail(final String email) {
+    private Email buildEmail(final String email) {
         return Email.builder().address(email).build();
     }
+
+    private Address buildAddress(String address1, String address2, String zip) {
+
+        return Address.builder()
+                .address1(address1)
+                .address2(address2)
+                .zip(zip)
+                .build();
+    }
+
 
 }

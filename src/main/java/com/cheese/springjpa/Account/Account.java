@@ -1,7 +1,9 @@
 package com.cheese.springjpa.Account;
 
+import com.cheese.springjpa.Account.model.Address;
 import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.Account.model.Password;
+import com.cheese.springjpa.common.model.DateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,38 +34,23 @@ public class Account {
     @Embedded
     private Password password;
 
-    @Column(name = "address1", nullable = false)
-    private String address1;
+    @Embedded
+    private Address address;
 
-    @Column(name = "address2", nullable = false)
-    private String address2;
-
-    @Column(name = "zip", nullable = false)
-    private String zip;
-
-    @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @Embedded
+    private DateTime dateTime;
 
     @Builder
-    public Account(Email email, String fistName, String lastName, Password password, String address1, String address2, String zip) {
+    public Account(Email email, String fistName, String lastName, Password password, Address address) {
         this.email = email;
         this.fistName = fistName;
         this.lastName = lastName;
         this.password = password;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.zip = zip;
+        this.address = address;
     }
 
 
     public void updateMyAccount(AccountDto.MyAccountReq dto) {
-        this.address1 = dto.getAddress1();
-        this.address2 = dto.getAddress2();
-        this.zip = dto.getZip();
+        this.address = dto.getAddress();
     }
 }
