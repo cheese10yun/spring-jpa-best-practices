@@ -68,7 +68,6 @@ public class DeliveryServiceTest {
 
         //then
         assertThat(delivery.getAddress(), is(address));
-        assertThat(delivery.getDateTime(), is(isNull()));
 
 
     }
