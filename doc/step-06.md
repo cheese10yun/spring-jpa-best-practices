@@ -81,15 +81,15 @@ public static class SignUpReq {
 
 	@Builder
 	public SignUpReq(Email email, String fistName, String lastName, String password, Address address) {
-			this.email = email;
-			this.address = address;
+        this.email = email;
+        this.address = address;
 	}
 
 	public Account toEntity() {
-			return Account.builder()
-							.email(this.email)
-							.address(this.address)
-							.build();
+        return Account.builder()
+            .email(this.email)
+            .address(this.address)
+            .build();
 	}
 }
 
