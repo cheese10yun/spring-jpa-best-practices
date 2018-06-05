@@ -36,4 +36,4 @@ $ mvn spring-boot:run
 
 ### API Swagger
 ![](https://i.imgur.com/1cc1auF.png)
-해당 API는 Swagger [http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)으로 테스트해 볼 수 있습니다.
+해당 API는 Swagger [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)으로 테스트해 볼 수 있습니다.
