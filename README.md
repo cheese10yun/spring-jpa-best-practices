@@ -10,7 +10,7 @@
 4. [step-04 : Embedded를 이용한 Password 처리](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-04.md)
 5. [step-05: OneToMany 관계 설정 팁](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-05.md)
 6. [step-06: Setter 사용하지 않기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-06.md)
-7. [step-07: Embedded를 적극 활용 (작업중...)]()
+7. [step-07: Embedded를 적극 활용](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-07.md)
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 

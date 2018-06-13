@@ -1,5 +1,6 @@
 package com.cheese.springjpa.Account;
 
+import com.cheese.springjpa.Account.model.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,13 @@ public class AccountController {
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.Res getUser(@PathVariable final long id) {
         return new AccountDto.Res(accountService.findById(id));
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public AccountDto.Res getUserByEmail(@Valid Email email) {
+        return new AccountDto.Res(accountService.findByEmail(email));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

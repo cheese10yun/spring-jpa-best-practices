@@ -43,6 +43,7 @@ public class AccountServiceTest {
 
         //커버리지를 높이기 위한 임시 함수
         account.getId();
+        account.getDateTime();
     }
 
     @Test(expected = EmailDuplicationException.class)
@@ -109,6 +110,29 @@ public class AccountServiceTest {
         assertThat(existedEmail, is(true));
     }
 
+    @Test
+    public void findByEmail_존재하는_이매일조해경우_해당유저리턴() {
+        //given
+        final Account account = buildSignUpReq().toEntity();
+        given(accountRepository.findByEmail(account.getEmail())).willReturn(account);
+
+        //when
+        final Account accountServiceByEmail = accountService.findByEmail(account.getEmail());
+
+        //then
+        assertThat(accountServiceByEmail.getEmail(), is(account.getEmail()));
+    }
+
+    @Test(expected = AccountNotFoundException.class)
+    public void findByEmail_존재하는_않는경우() {
+        //given
+        given(accountRepository.findByEmail(any())).willReturn(null);
+
+        //when
+        accountService.findByEmail(any());
+
+    }
+
     private AccountDto.MyAccountReq buildMyAccountReq() {
         return AccountDto.MyAccountReq.builder()
                 .address(buildAddress("주소수정", "주소수정2", "061-233-444"))
@@ -135,7 +159,7 @@ public class AccountServiceTest {
     }
 
     private Email buildEmail(final String email) {
-        return Email.builder().address(email).build();
+        return Email.builder().value(email).build();
     }
 
     private Address buildAddress(String address1, String address2, String zip) {

@@ -5,6 +5,7 @@ import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -34,46 +35,23 @@ public class ErrorExceptionController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error(e.getMessage());
-        final BindingResult bindingResult = e.getBindingResult();
-        final List<FieldError> errors = bindingResult.getFieldErrors();
-
-        return buildFieldErrors(
-                ErrorCode.INPUT_VALUE_INVALID,
-                errors.parallelStream()
-                        .map(error -> ErrorResponse.FieldError.builder()
-                                .reason(error.getDefaultMessage())
-                                .field(error.getField())
-                                .value((String) error.getRejectedValue())
-                                .build())
-                        .collect(Collectors.toList())
-        );
+        final List<ErrorResponse.FieldError> fieldErrors = getFieldErrors(e.getBindingResult());
+        return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, fieldErrors);
     }
 
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    protected ErrorResponse handleConstraintViolationException(ConstraintViolationException e) {
-//        log.error(e.getMessage());
-//        final Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
-//
-//        return buildFieldErrors(
-//                ErrorCode.INPUT_VALUE_INVALID,
-//                constraintViolations.parallelStream()
-//                        .map(error -> ErrorResponse.FieldError.builder()
-//                                .reason(error.getMessage())
-//                                .value(error.getInvalidValue().toString())
-//                                .field(error.getPropertyPath().toString())
-//                                .build())
-//                        .collect(Collectors.toList())
-//        );
-//    }
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handleBindException(BindException e) {
+        final List<ErrorResponse.FieldError> fieldErrors = getFieldErrors(e.getBindingResult());
+        return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, fieldErrors);
+    }
 
 
     @ExceptionHandler(EmailDuplicationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleConstraintViolationException(EmailDuplicationException e) {
         final ErrorCode errorCode = ErrorCode.EMAIL_DUPLICATION;
-        log.error(errorCode.getMessage(), e.getEmail());
+        log.error(errorCode.getMessage(), e.getEmail() + e.getField());
         return buildError(errorCode);
     }
 
@@ -92,6 +70,17 @@ public class ErrorExceptionController {
 //        log.error(e.getMessage());
 //        return buildError(e.getErrorCode());
 //    }
+
+    private List<ErrorResponse.FieldError> getFieldErrors(BindingResult bindingResult) {
+        final List<FieldError> errors = bindingResult.getFieldErrors();
+        return errors.parallelStream()
+                .map(error -> ErrorResponse.FieldError.builder()
+                        .reason(error.getDefaultMessage())
+                        .field(error.getField())
+                        .value((String) error.getRejectedValue())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
 
     private ErrorResponse buildError(ErrorCode errorCode) {
