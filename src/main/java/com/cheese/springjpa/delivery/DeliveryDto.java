@@ -60,7 +60,7 @@ public class DeliveryDto {
 
 
     @Getter
-    static class LogRes {
+    public static class LogRes {
         private DeliveryStatus status;
         private DateTime dateTime;
 

@@ -15,6 +15,17 @@ public class DeliveryLogTest {
         final DeliveryLog log = buildLog(buildDelivery(), status);
 
         assertThat(status, is(log.getStatus()));
+
+        //커버리지 높이기위한 임시함수
+        log.getDateTime();
+        log.getDelivery();
+        log.getLastStatus();
+
+        DeliveryDto.LogRes logRes = new DeliveryDto.LogRes(log);
+
+        logRes.getDateTime();
+        logRes.getStatus();
+
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.cheese.springjpa.Account.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,14 +12,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@JsonIgnoreProperties({"host", "id"})
 public class Email {
 
     @org.hibernate.validator.constraints.Email
     @Column(name = "email", nullable = false, unique = true)
-    private String address;
+    private String value;
 
     @Builder
-    public Email(String address) {
-        this.address = address;
+    public Email(String value) {
+        this.value = value;
+    }
+
+    public String getHost() {
+        int index = value.indexOf("@");
+        return value.substring(index);
+    }
+
+    public String getId() {
+        int index = value.indexOf("@");
+        return value.substring(0, index);
     }
 }

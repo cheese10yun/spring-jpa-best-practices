@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -45,8 +46,14 @@ public class AccountControllerTest {
 
     private MockMvc mockMvc;
 
+    private Account account;
+
     @Before
     public void setUp() {
+
+        final AccountDto.SignUpReq dto = buildSignUpReq();
+        account = dto.toEntity();
+
         mockMvc = MockMvcBuilders.standaloneSetup(accountController)
                 .setControllerAdvice(new ErrorExceptionController())
                 .build();
@@ -67,7 +74,7 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())))
-                .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
+                .andExpect(jsonPath("$.email.value", is(dto.getEmail().getValue())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
     }
@@ -93,8 +100,8 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.message", is(ErrorCode.INPUT_VALUE_INVALID.getMessage())))
                 .andExpect(jsonPath("$.code", is(ErrorCode.INPUT_VALUE_INVALID.getCode())))
                 .andExpect(jsonPath("$.status", is(ErrorCode.INPUT_VALUE_INVALID.getStatus())))
-                .andExpect(jsonPath("$.errors[0].field", is("email.address")))
-                .andExpect(jsonPath("$.errors[0].value", is(dto.getEmail().getAddress())));
+                .andExpect(jsonPath("$.errors[0].field", is("email.value")))
+                .andExpect(jsonPath("$.errors[0].value", is(dto.getEmail().getValue())));
     }
 
 
@@ -167,7 +174,7 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())))
-                .andExpect(jsonPath("$.email.address", is(dto.getEmail().getAddress())))
+                .andExpect(jsonPath("$.email.value", is(dto.getEmail().getValue())))
                 .andExpect(jsonPath("$.fistName", is(dto.getFistName())))
                 .andExpect(jsonPath("$.lastName", is(dto.getLastName())));
     }
@@ -213,6 +220,47 @@ public class AccountControllerTest {
 
     }
 
+    @Test
+    public void getUserByEmail() throws Exception {
+        //given
+        given(accountService.findByEmail(any())).willReturn(account);
+
+        //when
+        final String email = account.getEmail().getValue();
+        final ResultActions resultActions = requestGetUserByEmail("/accounts?email=" + email);
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.address.address1", is(account.getAddress().getAddress1())))
+                .andExpect(jsonPath("$.address.address2", is(account.getAddress().getAddress2())))
+                .andExpect(jsonPath("$.address.zip", is(account.getAddress().getZip())))
+                .andExpect(jsonPath("$.email.value", is(account.getEmail().getValue())))
+                .andExpect(jsonPath("$.fistName", is(account.getFistName())))
+                .andExpect(jsonPath("$.lastName", is(account.getLastName())));
+    }
+
+    @Test
+    public void getUserByEmail_유효하지않은_이메일일경우() throws Exception {
+        //given
+//        given(accountService.findByEmail(any())).willReturn(account);
+
+        //when
+        final String email = account.getEmail().getValue();
+        final ResultActions resultActions = requestGetUserByEmail("/accounts?email=" + "test");
+
+        //then
+        resultActions
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status", is(HttpStatus.BAD_REQUEST.value())));
+    }
+
+    private ResultActions requestGetUserByEmail(String email) throws Exception {
+        return mockMvc.perform(get(email)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print());
+    }
+
     private ResultActions requestMyAccount(AccountDto.MyAccountReq dto) throws Exception {
         return mockMvc.perform(put("/accounts/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -254,7 +302,7 @@ public class AccountControllerTest {
     }
 
     private Email buildEmail(final String email) {
-        return Email.builder().address(email).build();
+        return Email.builder().value(email).build();
     }
 
     private Address buildAddress(String address1, String address2, String zip) {

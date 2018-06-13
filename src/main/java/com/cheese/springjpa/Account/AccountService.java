@@ -2,6 +2,7 @@ package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.model.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +22,15 @@ public class AccountService {
         return accountRepository.save(dto.toEntity());
     }
 
-    @Transactional(readOnly = true)
     public Account findById(long id) {
         final Account account = accountRepository.findOne(id);
-        if (account == null)
-            throw new AccountNotFoundException(id);
+        if (account == null) throw new AccountNotFoundException(id);
+        return account;
+    }
+
+    public Account findByEmail(final Email email) {
+        final Account account = accountRepository.findByEmail(email);
+        if (account == null) throw new AccountNotFoundException(email);
         return account;
     }
 
