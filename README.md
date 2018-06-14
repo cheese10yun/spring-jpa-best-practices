@@ -15,6 +15,10 @@
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 
 
+## 질문
+![](https://i.imgur.com/Y4t4oWM.png)
+
+* Github Issue를 통해서 이슈를 등록해주시면 제가 아는 부분에 대해서는 최대한 답변드리겠습니다.
 
 ## 개발환경
 * Spring boot 1.5.8.RELEASE
