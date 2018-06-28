@@ -1,7 +1,7 @@
 package com.cheese.springjpa.error;
 
-import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.account.exception.AccountNotFoundException;
+import com.cheese.springjpa.account.exception.EmailDuplicationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

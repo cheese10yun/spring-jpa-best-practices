@@ -1,6 +1,6 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.Account.model.Address;
+import com.cheese.springjpa.account.model.Address;
 import com.cheese.springjpa.error.ErrorExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -16,7 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -37,7 +38,7 @@ public class DeliveryControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(deliveryController)
                 .setControllerAdvice(new ErrorExceptionController())
                 .build();
@@ -81,7 +82,7 @@ public class DeliveryControllerTest {
     }
 
     @Test
-    public void updateDelivery() throws Exception {
+    public void updateDelivery() {
         //given
         final Address address = buildAddress();
         final DeliveryDto.CreationReq dto = buildCreationDto(address);
