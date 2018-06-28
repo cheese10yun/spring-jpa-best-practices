@@ -1,4 +1,4 @@
-package com.cheese.springjpa.Account.model;
+package com.cheese.springjpa.account.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;

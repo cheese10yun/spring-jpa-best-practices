@@ -1,6 +1,6 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.Account.model.Address;
+import com.cheese.springjpa.account.model.Address;
 import com.cheese.springjpa.common.model.DateTime;
 import lombok.AccessLevel;
 import lombok.Builder;

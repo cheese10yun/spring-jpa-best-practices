@@ -1,6 +1,6 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.account;
 
-import com.cheese.springjpa.Account.model.Email;
+import com.cheese.springjpa.account.model.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -12,6 +12,9 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+  datasource:
+    data: classpath:init.sql # 시작할때 실행시킬 script
+
 
   jackson:
     serialization:
@@ -19,4 +22,4 @@ spring:
 
 logging:
   level:
-    ROOT: debug
+    ROOT: error

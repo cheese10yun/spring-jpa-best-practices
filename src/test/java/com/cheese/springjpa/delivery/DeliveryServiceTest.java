@@ -1,6 +1,6 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.Account.model.Address;
+import com.cheese.springjpa.account.model.Address;
 import com.cheese.springjpa.delivery.exception.DeliveryNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeliveryServiceTest {

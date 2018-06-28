@@ -1,9 +1,9 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.account;
 
-import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.exception.EmailDuplicationException;
-import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.Account.model.Email;
+import com.cheese.springjpa.account.exception.AccountNotFoundException;
+import com.cheese.springjpa.account.exception.EmailDuplicationException;
+import com.cheese.springjpa.account.model.Address;
+import com.cheese.springjpa.account.model.Email;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,8 +1,8 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.account;
 
-import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.Account.model.Email;
-import com.cheese.springjpa.Account.model.Password;
+import com.cheese.springjpa.account.model.Address;
+import com.cheese.springjpa.account.model.Email;
+import com.cheese.springjpa.account.model.Password;
 import com.cheese.springjpa.common.model.DateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "account")
@@ -23,7 +22,7 @@ public class Account {
     private long id;
 
     @Embedded
-    private com.cheese.springjpa.Account.model.Email email;
+    private com.cheese.springjpa.account.model.Email email;
 
     @Column(name = "first_name", nullable = false)
     private String fistName;
