@@ -95,10 +95,10 @@ public void order_쿠폰할인적용() {
 ![](https://i.imgur.com/k6V64ye.png)
 
 ```sql
-&amplt!-- order가 연관 관계의 주인일 경우 SQL --&ampgt
+// order가 연관 관계의 주인일 경우 SQL
 insert into orders (id, coupon_id, price) values (null, ?, ?) 
 
-&amplt!-- coupon이 연관 관계의 주인일 경우 SQL --&ampgt
+//coupon이 연관 관계의 주인일 경우 SQL
 insert into orders (id, price) values (null, ?)
 update coupon set discount_amount=?, order_id=?, use=? where id=?
 ```
@@ -188,10 +188,10 @@ public class Order {
 모든 주문에 할인 쿠폰이 적용된다면 @JoinColumn의 nullable 옵션을 false로 주는 것이 좋습니다. **NOT NULL 제약 조건을 준수해서 안전성이 보장됩니다.**
 
 ![](https://i.imgur.com/bHfKh8m.png)
-* nullable = false 없는 경우
+* nullable = false 없는 경우, outer join
 
 ![](https://i.imgur.com/94To549.png)
-* nullable = false 선언한 경우
+* nullable = false 선언한 경우, inner join
 
 
 **외래 키에 NOT NULL 제약 조건을 설정하면 값이 있는 것을 보장합니다. 따라서 JPA는 이때 내부조인을 
