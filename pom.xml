@@ -11,7 +11,8 @@
     <name>spring-jpa-best-practices</name>
 	<description>Spring JPA best practices</description>
 
-	<parent>
+
+    <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.8.RELEASE</version>
@@ -99,7 +100,6 @@
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.2.0</version>
                 <configuration>
                     <repoToken>AwizlIBUteWCP2IhLPzPKEIeHQBU4gfG8</repoToken>
                 </configuration>
@@ -116,7 +116,6 @@
                     <check/>
                 </configuration>
             </plugin>
-
 
         </plugins>
 	</build>
