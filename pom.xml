@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.cheese</groupId>
-	<artifactId>spring-jpa</artifactId>
+    <artifactId>spring-jpa-best-practices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-jpa</name>
+    <name>spring-jpa-best-practices</name>
 	<description>Spring JPA best practices</description>
 
 	<parent>
