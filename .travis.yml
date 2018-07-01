@@ -11,7 +11,7 @@ branches:
     - master
 
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn coveralls:report
 
 notifications:
   slack: cheese-dev:JXKSTVY4wHsMPbJi2uoKtyxs
