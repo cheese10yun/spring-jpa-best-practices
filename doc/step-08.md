@@ -15,7 +15,6 @@ OneToOne 관계 설정 시에 간단한 팁을 정리하겠습니다. 해당 객
 ## Entity 객체
 ```java
 public class Coupon {
-
     @Id
     @GeneratedValue
     private long id;
@@ -31,7 +30,6 @@ public class Coupon {
 }
 
 public class Order {
-
     @Id
     @GeneratedValue
     private long id;
