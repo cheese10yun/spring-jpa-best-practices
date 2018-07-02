@@ -217,7 +217,6 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())));
-
     }
 
     @Test
