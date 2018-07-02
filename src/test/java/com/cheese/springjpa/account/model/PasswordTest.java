@@ -2,7 +2,6 @@ package com.cheese.springjpa.Account.model;
 
 import com.cheese.springjpa.Account.exception.PasswordFailedExceededException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -13,7 +12,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class PasswordTest {
 
