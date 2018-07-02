@@ -27,7 +27,6 @@ public class AccountServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
-
     @Test
     public void create_회원가입_성공() {
         //given
@@ -54,7 +53,6 @@ public class AccountServiceTest {
 
         //when
         accountService.create(dto);
-
     }
 
     @Test
