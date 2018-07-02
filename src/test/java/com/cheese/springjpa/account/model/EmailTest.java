@@ -1,13 +1,10 @@
 package com.cheese.springjpa.Account.model;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-
-@Ignore
 public class EmailTest {
 
     @Test
