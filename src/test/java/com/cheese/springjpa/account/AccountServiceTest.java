@@ -4,6 +4,7 @@ import com.cheese.springjpa.account.exception.AccountNotFoundException;
 import com.cheese.springjpa.account.exception.EmailDuplicationException;
 import com.cheese.springjpa.account.model.Address;
 import com.cheese.springjpa.account.model.Email;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,6 +19,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {
 
