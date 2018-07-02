@@ -24,7 +24,6 @@ public class PasswordTest {
     public void setUp() {
         passwordValue = "password001";
         password = Password.builder().value(passwordValue).build();
-
     }
 
     @Test
