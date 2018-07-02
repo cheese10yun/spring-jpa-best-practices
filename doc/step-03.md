@@ -22,7 +22,7 @@
 ```java
 public class Account {
     @Embedded
-    private com.cheese.springjpa.Account.model.Email email;
+    private com.cheese.springjpa.account.model.Email email;
 }
 
 @Embeddable
@@ -45,11 +45,11 @@ public static class SignUpReq {
     // @Email 기존코드
     // private String email;
     @Valid // @Valid 반드시 필요
-    private com.cheese.springjpa.Account.model.Email email;
+    private com.cheese.springjpa.account.model.Email email;
 
     private String zip;
     @Builder
-    public SignUpReq(com.cheese.springjpa.Account.model.Email email, String fistName, String lastName, String password, String address1, String address2, String zip) {
+    public SignUpReq(com.cheese.springjpa.account.model.Email email, String fistName, String lastName, String password, String address1, String address2, String zip) {
         this.email = email;
         ...
         this.zip = zip;
