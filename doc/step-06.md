@@ -76,7 +76,7 @@ public void updateMyAccount(AccountDto.MyAccountReq dto) {
 // 전체 코드를 보시는 것을 추천드립니다.
 public static class SignUpReq {
 
-	private com.cheese.springjpa.account.model.Email email;
+	private com.cheese.springjpa.Account.model.Email email;
 	private Address address;
 
 	@Builder

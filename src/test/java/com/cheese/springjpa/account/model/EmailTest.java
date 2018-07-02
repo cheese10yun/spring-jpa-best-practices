@@ -1,4 +1,4 @@
-package com.cheese.springjpa.account.model;
+package com.cheese.springjpa.Account.model;
 
 import org.junit.Ignore;
 import org.junit.Test;

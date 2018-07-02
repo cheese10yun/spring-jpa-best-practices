@@ -1,6 +1,6 @@
-package com.cheese.springjpa.account.model;
+package com.cheese.springjpa.Account.model;
 
-import com.cheese.springjpa.account.exception.PasswordFailedExceededException;
+import com.cheese.springjpa.Account.exception.PasswordFailedExceededException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

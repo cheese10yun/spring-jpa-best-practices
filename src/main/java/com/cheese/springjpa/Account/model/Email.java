@@ -1,4 +1,4 @@
-package com.cheese.springjpa.account.model;
+package com.cheese.springjpa.Account.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
