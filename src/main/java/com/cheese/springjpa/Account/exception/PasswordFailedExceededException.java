@@ -1,4 +1,4 @@
-package com.cheese.springjpa.account.exception;
+package com.cheese.springjpa.Account.exception;
 
 import com.cheese.springjpa.error.ErrorCode;
 import lombok.Getter;

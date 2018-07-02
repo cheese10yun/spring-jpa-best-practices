@@ -1,8 +1,8 @@
-package com.cheese.springjpa.account;
+package com.cheese.springjpa.Account;
 
-import com.cheese.springjpa.account.exception.AccountNotFoundException;
-import com.cheese.springjpa.account.exception.EmailDuplicationException;
-import com.cheese.springjpa.account.model.Email;
+import com.cheese.springjpa.Account.exception.AccountNotFoundException;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import com.cheese.springjpa.Account.model.Email;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +41,7 @@ public class AccountService {
     }
 
     @Transactional(readOnly = true)
-    public boolean isExistedEmail(com.cheese.springjpa.account.model.Email email) {
+    public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {
         return accountRepository.findByEmail(email) != null;
     }
 }

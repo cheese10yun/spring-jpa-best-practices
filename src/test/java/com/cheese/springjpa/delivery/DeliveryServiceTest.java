@@ -1,6 +1,6 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.account.model.Address;
+import com.cheese.springjpa.Account.model.Address;
 import com.cheese.springjpa.delivery.exception.DeliveryNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
