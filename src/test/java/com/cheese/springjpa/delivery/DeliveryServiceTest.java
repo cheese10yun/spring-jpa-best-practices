@@ -9,10 +9,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeliveryServiceTest {
@@ -82,6 +85,28 @@ public class DeliveryServiceTest {
 
         //when
         deliveryService.findById(anyLong());
+    }
+
+    @Test
+    public void removeLogs() {
+        //given
+        final Address address = buildAddress();
+        final DeliveryDto.CreationReq dto = buildCreationDto(address);
+        given(deliveryRepository.findOne(anyLong())).willReturn(dto.toEntity());
+
+        //when
+        final Delivery delivery = deliveryService.removeLogs(anyLong());
+
+        //then
+        assertThat(delivery.getLogs(), is(empty()));
+
+    }
+
+    @Test
+    public void remove() {
+        deliveryService.remove(anyLong());
+
+        verify(deliveryRepository, atLeastOnce()).delete(anyLong());
     }
 
     private DeliveryDto.UpdateReq buildUpdateReqDto() {

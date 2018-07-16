@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class DeliveryLog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Enumerated(EnumType.STRING)
