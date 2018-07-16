@@ -30,11 +30,6 @@ public class Coupon {
     @OneToOne(mappedBy = "coupon")
     private Order order;
 
-//    @JsonIgnore
-//    @OneToOne
-//    @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
-//    private Order order;
-
     @Builder
     public Coupon(double discountAmount) {
         this.discountAmount = discountAmount;

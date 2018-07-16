@@ -32,6 +32,17 @@ public class DeliveryService {
         return delivery;
     }
 
+    public Delivery removeLogs(long id) {
+        final Delivery delivery = findById(id);
+        delivery.getLogs().clear();
+        return delivery;
+    }
+
+    public void remove(long id) {
+        deliveryRepository.delete(id);
+    }
+
+
 
 
 }
