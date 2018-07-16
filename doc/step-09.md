@@ -68,7 +68,7 @@ class DeliveryService {
 Delivery가 시작되면 DeliveryLog는 반드시 PENDDING이어야 한다고 가정했을 경우 편의 메소드를 이용해서 두 객체에 모두 필요한 값을 바인딩시켜줍니다.
 
 ### CaseCade PERSIST 설정
-```
+```sql
 // cascade 없는 경우
 Hibernate: insert into delivery (id, address1, address2, zip, created_at, update_at) values (null, ?, ?, ?, ?, ?)
 
