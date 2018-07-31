@@ -39,7 +39,7 @@ public class Email {
 ## DTO 변경
 
 ### AccountDto.class
-```
+```java
 public static class SignUpReq {
 
     // @Email 기존코드
