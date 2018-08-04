@@ -17,6 +17,7 @@
 7. [step-07: Embedded를 적극 활용](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-07.md)
 8. [step-08: OneToOne 관계 설정 팁](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-08.md)
 9. [step-09: OneToMany 관계 설정 팁(2)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-09.md)
+10. [step-10: OneToMany Properties 설정값 가져오기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-10.md)
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 
