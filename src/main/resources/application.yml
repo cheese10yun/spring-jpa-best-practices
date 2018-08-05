@@ -4,11 +4,11 @@ spring:
 
 
 user:
-  email: "yun@test.com"
-  name: "yun"
-  age: 27
-  auth: true
-  amount: 100
+  email: "yun@test"
+  nickname: "nickname"
+  age: 28
+  auth: false
+  amount: 101
 
 
 # Local 환경

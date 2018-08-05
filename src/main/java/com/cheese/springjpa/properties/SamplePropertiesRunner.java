@@ -16,7 +16,7 @@ public class SamplePropertiesRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         final String email = properties.getEmail();
-        final String name = properties.getName();
+        final String name = properties.getNickname();
         final int age = properties.getAge();
         final boolean auth = properties.isAuth();
         final double amount = properties.getAmount();
