@@ -117,9 +117,18 @@ Binding to target com.cheese.springjpa.properties.SampleProperties$$EnhancerBySp
 ### 빈으로 등록 해서 재사용성이 높음
 
 ```java
-private final SampleProperties properties;
+public class SampleProperties {
+    @Email
+    private String email;
+    @NotEmpty
+    private String nickname;
+    private int age;
+    private boolean auth;
+    private double amount;
 
-properties.get...
+    // getter, setter 
+    // properties 사용할 떄는 SampleProperties 객체를 사용함, 데이터의 응집력, 캡슐화가 높아짐
+}
 ```
 
 SamplePropertiesRunner 클래스를 보시면 SampleProperties를 의존성 주입을 받아서 다른 빈에서 재사용성이 높습니다. 단순히 재사용성이 높은 것이 아니라 user의 응집력이 높아집니다.
