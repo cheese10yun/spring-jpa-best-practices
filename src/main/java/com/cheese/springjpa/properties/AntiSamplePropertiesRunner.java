@@ -17,7 +17,7 @@ public class AntiSamplePropertiesRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         final String email = env.getProperty("user.email");
-        final String name = env.getProperty("user.name");
+        final String nickname = env.getProperty("user.nickname");
         final int age = Integer.valueOf(env.getProperty("user.age"));
         final boolean auth = Boolean.valueOf(env.getProperty("user.auth"));
         final int amount = Integer.valueOf(env.getProperty("user.amount"));
@@ -25,7 +25,7 @@ public class AntiSamplePropertiesRunner implements ApplicationRunner {
 
         log.info("=========ANTI=========");
         log.info(email);
-        log.info(name);
+        log.info(nickname);
         log.info(String.valueOf(age));
         log.info(String.valueOf(auth));
         log.info(String.valueOf(amount));
