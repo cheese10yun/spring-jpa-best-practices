@@ -8,16 +8,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -80,24 +80,6 @@ public class DeliveryControllerTest {
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())));
     }
-
-    @Test
-    public void updateDelivery() {
-        //given
-        final Address address = buildAddress();
-        final DeliveryDto.CreationReq dto = buildCreationDto(address);
-        final DeliveryDto.UpdateReq updateReq = buildUpdateReqDto();
-        final Delivery delivery = dto.toEntity();
-
-        delivery.addLog(updateReq.getStatus());
-        given(deliveryService.findById(anyLong())).willReturn(delivery);
-        given(deliveryService.updateStatus(anyLong(), any())).willReturn(delivery);
-
-
-        //then
-
-    }
-
 
 
     private ResultActions requestGetDelivery() throws Exception {

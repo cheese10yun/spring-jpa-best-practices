@@ -12,6 +12,6 @@ public class CouponService {
     private final CouponRepository couponRepository;
 
     public Coupon findById(long id) {
-        return couponRepository.findOne(id);
+        return couponRepository.findById(id).get();
     }
 }
