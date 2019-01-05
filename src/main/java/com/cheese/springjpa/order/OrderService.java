@@ -23,6 +23,6 @@ public class OrderService {
     }
 
     public Order findById(long id) {
-        return orderRepository.findOne(id);
+        return orderRepository.findById(id).get();
     }
 }

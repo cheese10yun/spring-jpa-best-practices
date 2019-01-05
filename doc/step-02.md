@@ -186,10 +186,9 @@ public class AccountNotFoundException extends RuntimeException {
 }
 
 public Account findById(long id) {
-    final Account account = accountRepository.findOne(id);
-    if (account == null)
-        throw new AccountNotFoundException(id);
-    return account;
+    final Optional<Account> account = accountRepository.findById(id);
+    account.orElseThrow(() -> new AccountNotFoundException(id));
+    return account.get();
 }
 ```
 

@@ -8,13 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
@@ -59,20 +61,20 @@ public class AccountServiceTest {
     public void findById_존재하는경우_회원리턴() {
         //given
         final AccountDto.SignUpReq dto = buildSignUpReq();
-        given(accountRepository.findOne(anyLong())).willReturn(dto.toEntity());
+        given(accountRepository.findById(anyLong())).willReturn(Optional.of(dto.toEntity()));
 
         //when
         final Account account = accountService.findById(anyLong());
 
         //then
-        verify(accountRepository, atLeastOnce()).findOne(anyLong());
+        verify(accountRepository, atLeastOnce()).findById(anyLong());
         assertThatEqual(dto, account);
     }
 
     @Test(expected = AccountNotFoundException.class)
     public void findById_존재하지않은경우_AccountNotFoundException() {
         //given
-        given(accountRepository.findOne(anyLong())).willReturn(null);
+        given(accountRepository.findById(anyLong())).willReturn(Optional.empty());
 
         //when
         accountService.findById(anyLong());
@@ -83,7 +85,7 @@ public class AccountServiceTest {
         //given
         final AccountDto.SignUpReq signUpReq = buildSignUpReq();
         final AccountDto.MyAccountReq dto = buildMyAccountReq();
-        given(accountRepository.findOne(anyLong())).willReturn(signUpReq.toEntity());
+        given(accountRepository.findById(anyLong())).willReturn(Optional.of(signUpReq.toEntity()));
 
         //when
         final Account account = accountService.updateMyAccount(anyLong(), dto);
