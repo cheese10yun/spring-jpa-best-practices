@@ -8,6 +8,8 @@ properties.yml 설정 파일을 이용해서 environment를 편리하게 설정�
 | local       | 로컬 개발환경 | application-local.yml |
 | dev         | 개발환경    | application-dev.yml   |
 | prod        | 운영      | application-prod.yml  |
+
+
 위 처럼 환경이 분리되었을 경우를 기준으로 설명드리겠습니다.
 
 
