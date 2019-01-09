@@ -49,7 +49,7 @@ logging:
 ```
 * 각 개발환경에 맞는 properties 설정을 정의합니다.
 * 대표적으로 데이터베이스 정보, 외부 설정 정보 등이 있습니다.
-* `application.yml` 에서 정의한 `server.port` 8080 값을 자동으로 설정됩니다.
+* `application.yml` 에서 정의한 `server.port` 8080 값이 자동으로 설정됩니다.
 
 ## env 설정 방법
 
@@ -67,7 +67,7 @@ server:
 ### IntelliJ에서 설정 하는 방법
 ![](../images/intellij-properties.png)
 
-IntelliJ에서는 외부에서 넙겨 받는 인자로 다양한 환경 설정을 제공해줍니다. 가장 대표적인 방법으로 VM options, Active profiles 설정이 있습니다. 아래의 방법중 하나를 선택하면 됩니다.
+IntelliJ에서는 외부에서 넘겨 받는 인자로 다양한 환경 설정을 제공해줍니다. 가장 대표적인 방법으로 VM options, Active profiles 설정이 있습니다. 아래의 방법중 하나를 선택하면 됩니다.
 
 * VM options에 `-Dspring.profiles.active={env}` 추가합니다.
 * Active profiles: `{env}` 
