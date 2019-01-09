@@ -2,33 +2,5 @@ spring:
   profiles:
     active: local
 
-
-user:
-  email: "yun@test"
-  nickname: "nickname"
-  age: 28
-  auth: false
-  amount: 101
-
-
-# Local 환경
----
-spring:
-  profiles: local
-
-  jpa:
-    database: h2
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-  datasource:
-    data: classpath:init.sql # 시작할때 실행시킬 script
-
-
-  jackson:
-    serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
-
-logging:
-  level:
-    ROOT: info
+server:
+  port: 8080
