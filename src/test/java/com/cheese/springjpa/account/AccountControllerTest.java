@@ -15,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -216,41 +215,6 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address.address1", is(dto.getAddress().getAddress1())))
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())));
-    }
-
-    @Test
-    public void getUserByEmail() throws Exception {
-        //given
-        given(accountService.findByEmail(any())).willReturn(account);
-
-        //when
-        final String email = account.getEmail().getValue();
-        final ResultActions resultActions = requestGetUserByEmail("/accounts?email=" + email);
-
-        //then
-        resultActions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.address.address1", is(account.getAddress().getAddress1())))
-                .andExpect(jsonPath("$.address.address2", is(account.getAddress().getAddress2())))
-                .andExpect(jsonPath("$.address.zip", is(account.getAddress().getZip())))
-                .andExpect(jsonPath("$.email.value", is(account.getEmail().getValue())))
-                .andExpect(jsonPath("$.fistName", is(account.getFistName())))
-                .andExpect(jsonPath("$.lastName", is(account.getLastName())));
-    }
-
-    @Test
-    public void getUserByEmail_유효하지않은_이메일일경우() throws Exception {
-        //given
-//        given(accountService.findByEmail(any())).willReturn(account);
-
-        //when
-        final String email = account.getEmail().getValue();
-        final ResultActions resultActions = requestGetUserByEmail("/accounts?email=" + "test");
-
-        //then
-        resultActions
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.status", is(HttpStatus.BAD_REQUEST.value())));
     }
 
     private ResultActions requestGetUserByEmail(String email) throws Exception {
