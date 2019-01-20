@@ -31,6 +31,13 @@ public class AccountController {
         return accountService.findAll(pageable.of()).map(AccountDto.Res::new);
     }
 
+
+//    기본 Pageable을 사용한 코드
+//    @GetMapping
+//    public Page<AccountDto.Res> getAccounts(final Pageable pageable) {
+//        return accountService.findAll(pageable).map(AccountDto.Res::new);
+//    }
+
     @GetMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.Res getUser(@PathVariable final long id) {

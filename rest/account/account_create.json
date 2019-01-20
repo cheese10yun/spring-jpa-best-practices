@@ -1,10 +1,49 @@
 {
-  "address1": "string",
-  "address2": "string",
-  "email": {
-    "address": "string@test.com"
+  "content": [
+    {
+      "email": {
+        "value": "test001@test.com"
+      },
+      "password": {
+        "value": "$2a$10$tI3Y.nhgC.73LYCszoCaLu3nNEIM4QgeACiNseWlvr1zjrV5NCCs6",
+        "expirationDate": "+20120-01-20T00:00:00",
+        "failedCount": 0,
+        "ttl": 1209604,
+        "expiration": false
+      },
+      "fistName": "first",
+      "lastName": "last",
+      "address": {
+        "address1": "address1",
+        "address2": "address2",
+        "zip": "002"
+      }
+    }
+    ...
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 0,
+    "pageSize": 20,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
   },
-  "fistName": "string",
-  "lastName": "string",
-  "zip": "string"
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 13,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 13,
+  "first": true,
+  "empty": false
 }
