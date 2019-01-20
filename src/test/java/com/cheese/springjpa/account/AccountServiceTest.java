@@ -44,7 +44,8 @@ public class AccountServiceTest {
 
         //커버리지를 높이기 위한 임시 함수
         account.getId();
-        account.getDateTime();
+        account.getCreatedAt();
+        account.getUpdatedAt();
     }
 
     @Test(expected = EmailDuplicationException.class)
