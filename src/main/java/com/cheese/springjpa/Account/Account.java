@@ -3,13 +3,15 @@ package com.cheese.springjpa.Account;
 import com.cheese.springjpa.Account.model.Address;
 import com.cheese.springjpa.Account.model.Email;
 import com.cheese.springjpa.Account.model.Password;
-import com.cheese.springjpa.common.model.DateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
@@ -36,8 +38,13 @@ public class Account {
     @Embedded
     private Address address;
 
-    @Embedded
-    private DateTime dateTime;
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name = "update_at", nullable = false, updatable = false)
+    private LocalDateTime updatedAt;
 
     @Builder
     public Account(Email email, String fistName, String lastName, Password password, Address address) {

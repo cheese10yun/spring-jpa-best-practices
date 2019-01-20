@@ -11,6 +11,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+    properties:
+      hibernate.format_sql: true
   datasource:
     data: classpath:init.sql # 시작할때 실행시킬 script
 
@@ -21,4 +23,7 @@ spring:
 
 logging:
   level:
-    ROOT: info
+    root: info
+    org:
+      hibernate:
+        type: trace

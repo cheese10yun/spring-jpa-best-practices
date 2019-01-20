@@ -4,6 +4,8 @@ import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import com.cheese.springjpa.Account.model.Email;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,24 +18,29 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
 
-    public Account create(AccountDto.SignUpReq dto) {
 
-        if (isExistedEmail(dto.getEmail()))
-            throw new EmailDuplicationException(dto.getEmail());
-
-        return accountRepository.save(dto.toEntity());
-    }
-
+    @Transactional(readOnly = true)
     public Account findById(long id) {
         final Optional<Account> account = accountRepository.findById(id);
         account.orElseThrow(() -> new AccountNotFoundException(id));
         return account.get();
     }
 
+    @Transactional(readOnly = true)
     public Account findByEmail(final Email email) {
         final Account account = accountRepository.findByEmail(email);
         if (account == null) throw new AccountNotFoundException(email);
         return account;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Account> findAll(Pageable pageable) {
+        return accountRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {
+        return accountRepository.findByEmail(email) != null;
     }
 
     public Account updateMyAccount(long id, AccountDto.MyAccountReq dto) {
@@ -42,8 +49,10 @@ public class AccountService {
         return account;
     }
 
-    @Transactional(readOnly = true)
-    public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {
-        return accountRepository.findByEmail(email) != null;
+    public Account create(AccountDto.SignUpReq dto) {
+        if (isExistedEmail(dto.getEmail()))
+            throw new EmailDuplicationException(dto.getEmail());
+        return accountRepository.save(dto.toEntity());
     }
+
 }

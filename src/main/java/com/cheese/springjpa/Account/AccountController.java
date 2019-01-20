@@ -1,7 +1,7 @@
 package com.cheese.springjpa.Account;
 
+import com.cheese.springjpa.common.model.PageRequest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +27,8 @@ public class AccountController {
     }
 
     @GetMapping
-    public Page<AccountDto.Res> getAccounts(
-            @RequestParam(name = "type") final AccountSearchType type,
-            @RequestParam(name = "value", required = false) final String value,
-            final Pageable pageable
-    ) {
-
-        final Page<Account> search = accountSearchService.search(type, value, pageable);
-        return search.map(AccountDto.Res::new);
-
+    public Page<AccountDto.Res> getAccounts(final PageRequest pageable) {
+        return accountService.findAll(pageable.of()).map(AccountDto.Res::new);
     }
 
     @GetMapping(value = "/{id}")
