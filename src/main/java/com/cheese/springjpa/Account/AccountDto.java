@@ -7,9 +7,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 public class AccountDto {
 
@@ -41,7 +41,7 @@ public class AccountDto {
         public Account toEntity() {
             return Account.builder()
                     .email(this.email)
-                    .fistName(this.fistName)
+                    .firstName(this.fistName)
                     .lastName(this.lastName)
                     .password(Password.builder().value(this.password).build())
                     .address(this.address)
@@ -72,7 +72,7 @@ public class AccountDto {
 
         public Res(Account account) {
             this.email = account.getEmail();
-            this.fistName = account.getFistName();
+            this.fistName = account.getFirstName();
             this.lastName = account.getLastName();
             this.address = account.getAddress();
             this.password = account.getPassword();
