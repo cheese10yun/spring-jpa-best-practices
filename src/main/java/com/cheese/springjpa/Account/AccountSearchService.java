@@ -28,18 +28,19 @@ public class AccountSearchService extends QuerydslRepositorySupport {
                 query = from(account)
                         .where(account.email.value.likeIgnoreCase(value + "%"));
                 break;
+            case NAME:
+                query = from(account)
+                        .where(account.firstName.likeIgnoreCase(value + "%")
+                                .or(account.lastName.likeIgnoreCase(value + "%")));
+                break;
             case ALL:
                 query = from(account).fetchAll();
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-
-
         final List<Account> accounts = getQuerydsl().applyPagination(pageable, query).fetch();
-
         return new PageImpl<>(accounts, pageable, query.fetchCount());
     }
-
 
 }

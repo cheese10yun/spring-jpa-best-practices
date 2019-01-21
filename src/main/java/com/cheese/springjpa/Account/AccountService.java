@@ -4,8 +4,6 @@ import com.cheese.springjpa.Account.exception.AccountNotFoundException;
 import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import com.cheese.springjpa.Account.model.Email;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,10 +31,10 @@ public class AccountService {
         return account;
     }
 
-    @Transactional(readOnly = true)
-    public Page<Account> findAll(Pageable pageable) {
-        return accountRepository.findAll(pageable);
-    }
+//    @Transactional(readOnly = true)
+//    public Page<Account> findAll(Pageable pageable) {
+//        return accountRepository.findAll(pageable);
+//    }
 
     @Transactional(readOnly = true)
     public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {

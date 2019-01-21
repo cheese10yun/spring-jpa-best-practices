@@ -145,7 +145,7 @@ public class AccountServiceTest {
         assertThat(signUpReq.getAddress().getAddress2(), is(account.getAddress().getAddress2()));
         assertThat(signUpReq.getAddress().getZip(), is(account.getAddress().getZip()));
         assertThat(signUpReq.getEmail(), is(account.getEmail()));
-        assertThat(signUpReq.getFistName(), is(account.getFistName()));
+        assertThat(signUpReq.getFistName(), is(account.getFirstName()));
         assertThat(signUpReq.getLastName(), is(account.getLastName()));
     }
 
