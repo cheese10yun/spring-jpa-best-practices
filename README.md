@@ -19,8 +19,9 @@
 9. [step-09: OneToMany 관계 설정 팁(2)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-09.md)
 10. [step-10: Properties 설정값 가져오기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-10.md)
 11. [step-11: Properties environment 설정하기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-11.md)
-11. [step-12: 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-12.md)
-11. [step-13: Query Dsl이용한 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-13.md)
+12. [step-12: 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-12.md)
+13. [step-13: Query Dsl이용한 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-13.md)
+14. [step-14: JUnit 5적용하기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-14.md)
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 
