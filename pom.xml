@@ -169,6 +169,13 @@
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
                     <check/>
+
+                    <instrumentation>
+                        <excludes>
+                            <exclude>com/cheese/springjpa/Q*.class</exclude>
+                        </excludes>
+                    </instrumentation>
+
                 </configuration>
             </plugin>
 
