@@ -24,7 +24,6 @@ public class AccountRepositoryTest {
     public void findByEmail_test() {
         final String email = "test001@test.com";
         final Account account = accountRepository.findByEmail(Email.of(email));
-
         assertThat(account.getEmail().getValue()).isEqualTo(email);
     }
 
@@ -32,7 +31,6 @@ public class AccountRepositoryTest {
     public void findById_test() {
         final Optional<Account> optionalAccount = accountRepository.findById(1L);
         final Account account = optionalAccount.get();
-
         assertThat(account.getId()).isEqualTo(1L);
     }
 
@@ -44,7 +42,7 @@ public class AccountRepositoryTest {
     }
 
     @Test
-    public void name() {
+    public void findRecentlyRegistered_test() {
         final List<Account> accounts = accountRepository.findRecentlyRegistered(10);
         assertThat(accounts.size()).isLessThan(11);
     }
