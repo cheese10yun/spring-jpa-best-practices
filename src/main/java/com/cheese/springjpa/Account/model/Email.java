@@ -24,6 +24,10 @@ public class Email {
         this.value = value;
     }
 
+    public static Email of(String email) {
+        return new Email(email);
+    }
+
     public String getHost() {
         int index = value.indexOf("@");
         return value.substring(index);

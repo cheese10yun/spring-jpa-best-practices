@@ -1,7 +1,6 @@
 package com.cheese.springjpa.Account;
 
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import com.cheese.springjpa.Account.model.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,10 +11,9 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountFindService {
 
     private final AccountRepository accountRepository;
-
 
     @Transactional(readOnly = true)
     public Account findById(long id) {
@@ -31,26 +29,8 @@ public class AccountService {
         return account;
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<Account> findAll(Pageable pageable) {
-//        return accountRepository.findAll(pageable);
-//    }
-
     @Transactional(readOnly = true)
-    public boolean isExistedEmail(com.cheese.springjpa.Account.model.Email email) {
-        return accountRepository.findByEmail(email) != null;
+    public boolean isExistedEmail(Email email) {
+        return isExistedEmail(email);
     }
-
-    public Account updateMyAccount(long id, AccountDto.MyAccountReq dto) {
-        final Account account = findById(id);
-        account.updateMyAccount(dto);
-        return account;
-    }
-
-    public Account create(AccountDto.SignUpReq dto) {
-        if (isExistedEmail(dto.getEmail()))
-            throw new EmailDuplicationException(dto.getEmail());
-        return accountRepository.save(dto.toEntity());
-    }
-
 }
