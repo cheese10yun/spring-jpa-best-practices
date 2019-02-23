@@ -31,6 +31,6 @@ public class AccountFindService {
 
     @Transactional(readOnly = true)
     public boolean isExistedEmail(Email email) {
-        return isExistedEmail(email);
+        return accountRepository.existsByEmail(email);
     }
 }
