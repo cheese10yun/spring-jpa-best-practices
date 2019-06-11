@@ -1,15 +1,15 @@
 package com.cheese.springjpa.Account;
 
 
+import java.util.List;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Transactional(readOnly = true)
-public class AccountCustomRepositoryImpl extends QuerydslRepositorySupport implements AccountCustomRepository {
+public class AccountSupportRepositoryImpl extends QuerydslRepositorySupport implements
+    AccountSupportRepository {
 
-    public AccountCustomRepositoryImpl() {
+    public AccountSupportRepositoryImpl() {
         super(Account.class);
     }
 
