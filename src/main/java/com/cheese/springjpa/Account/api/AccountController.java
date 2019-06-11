@@ -1,12 +1,17 @@
 package com.cheese.springjpa.Account.api;
 
 import com.cheese.springjpa.Account.application.AccountService;
+import com.cheese.springjpa.Account.dao.AccountRepository;
 import com.cheese.springjpa.Account.dao.AccountSearchService;
+import com.cheese.springjpa.Account.domain.Email;
+import com.cheese.springjpa.Account.domain.QAccount;
 import com.cheese.springjpa.Account.dto.AccountDto;
 import com.cheese.springjpa.Account.dto.AccountDto.Res;
 import com.cheese.springjpa.Account.dto.AccountSearchType;
 import com.cheese.springjpa.common.model.PageRequest;
+import com.querydsl.core.types.Predicate;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("accounts")
+@RequiredArgsConstructor
 public class AccountController {
 
     private final AccountService accountService;
     private final AccountSearchService accountSearchService;
+  private final AccountRepository accountRepository;
 
-    public AccountController(AccountService accountService, AccountSearchService accountSearchService) {
-        this.accountService = accountService;
-        this.accountSearchService = accountSearchService;
-    }
+//    private final AccountRepository accountRepository;
+
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -77,4 +82,13 @@ public class AccountController {
     public AccountDto.Res updateMyAccount(@PathVariable final long id, @RequestBody final AccountDto.MyAccountReq dto) {
         return new AccountDto.Res(accountService.updateMyAccount(id, dto));
     }
+
+
+  @GetMapping("/email/existence")
+  public boolean existEmail(@RequestParam String email) {
+    final QAccount account = QAccount.account;
+    Predicate predicate = account.email.eq(Email.of(email));
+    return accountRepository.exists(predicate);
+  }
+
 }
