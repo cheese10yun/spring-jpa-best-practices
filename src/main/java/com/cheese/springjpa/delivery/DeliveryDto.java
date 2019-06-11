@@ -1,15 +1,14 @@
 package com.cheese.springjpa.delivery;
 
-import com.cheese.springjpa.Account.model.Address;
+import com.cheese.springjpa.Account.domain.Address;
 import com.cheese.springjpa.common.model.DateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DeliveryDto {
 

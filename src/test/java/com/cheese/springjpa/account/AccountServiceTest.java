@@ -1,17 +1,5 @@
 package com.cheese.springjpa.Account;
 
-import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.exception.EmailDuplicationException;
-import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.Account.model.Email;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Optional;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -19,6 +7,21 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
+
+import com.cheese.springjpa.Account.application.AccountService;
+import com.cheese.springjpa.Account.dao.AccountRepository;
+import com.cheese.springjpa.Account.domain.Account;
+import com.cheese.springjpa.Account.domain.Address;
+import com.cheese.springjpa.Account.domain.Email;
+import com.cheese.springjpa.Account.dto.AccountDto;
+import com.cheese.springjpa.Account.exception.AccountNotFoundException;
+import com.cheese.springjpa.Account.exception.EmailDuplicationException;
+import java.util.Optional;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {

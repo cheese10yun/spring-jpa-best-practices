@@ -1,6 +1,8 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.dao;
 
 
+import com.cheese.springjpa.Account.QAccount;
+import com.cheese.springjpa.Account.domain.Account;
 import java.util.List;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.transaction.annotation.Transactional;

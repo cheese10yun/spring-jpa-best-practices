@@ -1,6 +1,6 @@
 package com.cheese.springjpa.Account.exception;
 
-import com.cheese.springjpa.Account.model.Email;
+import com.cheese.springjpa.Account.domain.Email;
 import lombok.Getter;
 
 @Getter

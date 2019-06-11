@@ -1,14 +1,16 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.dao;
 
+import com.cheese.springjpa.Account.QAccount;
+import com.cheese.springjpa.Account.domain.Account;
+import com.cheese.springjpa.Account.dto.AccountSearchType;
 import com.querydsl.jpa.JPQLQuery;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 
 @Service

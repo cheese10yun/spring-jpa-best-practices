@@ -1,15 +1,15 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.dto;
 
-import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.Account.model.Email;
-import com.cheese.springjpa.Account.model.Password;
+import com.cheese.springjpa.Account.domain.Account;
+import com.cheese.springjpa.Account.domain.Address;
+import com.cheese.springjpa.Account.domain.Email;
+import com.cheese.springjpa.Account.domain.Password;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 public class AccountDto {
 
@@ -18,7 +18,7 @@ public class AccountDto {
     public static class SignUpReq {
 
         @Valid
-        private com.cheese.springjpa.Account.model.Email email;
+        private Email email;
         @NotEmpty
         private String fistName;
         @NotEmpty
@@ -64,7 +64,8 @@ public class AccountDto {
 
     @Getter
     public static class Res {
-        private com.cheese.springjpa.Account.model.Email email;
+
+        private Email email;
         private Password password;
         private String fistName;
         private String lastName;

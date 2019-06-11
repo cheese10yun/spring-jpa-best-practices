@@ -1,17 +1,19 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.domain;
 
-import com.cheese.springjpa.Account.model.Address;
-import com.cheese.springjpa.Account.model.Email;
-import com.cheese.springjpa.Account.model.Password;
+import com.cheese.springjpa.Account.dto.AccountDto.MyAccountReq;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
@@ -24,7 +26,7 @@ public class Account {
     private long id;
 
     @Embedded
-    private com.cheese.springjpa.Account.model.Email email;
+    private Email email;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -56,7 +58,7 @@ public class Account {
     }
 
 
-    public void updateMyAccount(AccountDto.MyAccountReq dto) {
+    public void updateMyAccount(MyAccountReq dto) {
         this.address = dto.getAddress();
     }
 }

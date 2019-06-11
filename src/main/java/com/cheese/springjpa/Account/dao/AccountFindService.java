@@ -1,12 +1,11 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.dao;
 
+import com.cheese.springjpa.Account.domain.Account;
+import com.cheese.springjpa.Account.domain.Email;
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.model.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,9 +16,7 @@ public class AccountFindService {
 
     @Transactional(readOnly = true)
     public Account findById(long id) {
-        final Optional<Account> account = accountRepository.findById(id);
-        account.orElseThrow(() -> new AccountNotFoundException(id));
-        return account.get();
+        return accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
     }
 
     @Transactional(readOnly = true)

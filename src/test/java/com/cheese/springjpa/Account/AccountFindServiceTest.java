@@ -1,19 +1,21 @@
 package com.cheese.springjpa.Account;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+
+import com.cheese.springjpa.Account.dao.AccountFindService;
+import com.cheese.springjpa.Account.dao.AccountRepository;
+import com.cheese.springjpa.Account.domain.Account;
+import com.cheese.springjpa.Account.domain.Email;
 import com.cheese.springjpa.Account.exception.AccountNotFoundException;
-import com.cheese.springjpa.Account.model.Email;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountFindServiceTest {

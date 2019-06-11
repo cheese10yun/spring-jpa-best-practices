@@ -1,9 +1,10 @@
 package com.cheese.springjpa.Account.model;
 
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import com.cheese.springjpa.Account.domain.Email;
+import org.junit.Test;
 
 public class EmailTest {
 

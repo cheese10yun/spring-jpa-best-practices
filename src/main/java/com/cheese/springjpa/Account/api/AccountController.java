@@ -1,11 +1,23 @@
-package com.cheese.springjpa.Account;
+package com.cheese.springjpa.Account.api;
 
+import com.cheese.springjpa.Account.application.AccountService;
+import com.cheese.springjpa.Account.dao.AccountSearchService;
+import com.cheese.springjpa.Account.dto.AccountDto;
+import com.cheese.springjpa.Account.dto.AccountDto.Res;
+import com.cheese.springjpa.Account.dto.AccountSearchType;
 import com.cheese.springjpa.common.model.PageRequest;
+import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
@@ -22,7 +34,7 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public AccountDto.Res signUp(@RequestBody @Valid final AccountDto.SignUpReq dto) {
+    public Res signUp(@RequestBody @Valid final AccountDto.SignUpReq dto) {
         return new AccountDto.Res(accountService.create(dto));
     }
 
