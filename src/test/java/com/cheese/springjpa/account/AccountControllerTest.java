@@ -24,7 +24,6 @@ import com.cheese.springjpa.Account.exception.EmailDuplicationException;
 import com.cheese.springjpa.error.ErrorCode;
 import com.cheese.springjpa.error.ErrorExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.querydsl.core.types.Predicate;
 import javax.validation.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -226,24 +225,6 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$.address.address2", is(dto.getAddress().getAddress2())))
                 .andExpect(jsonPath("$.address.zip", is(dto.getAddress().getZip())));
     }
-
-  @Test
-  public void email_existence_test() throws Exception {
-
-    //given
-    given(accountRepository.exists((Predicate) any())).willReturn(true);
-
-    //when
-    final ResultActions resultActions = mockMvc.perform(get("/accounts/email/existence")
-        .contentType(MediaType.APPLICATION_JSON_UTF8)
-        .param("email", "asd@asd.com"))
-        .andDo(print());
-
-    //then
-    resultActions
-        .andExpect(status().isOk());
-
-  }
 
     private ResultActions requestGetUserByEmail(String email) throws Exception {
         return mockMvc.perform(get(email)
