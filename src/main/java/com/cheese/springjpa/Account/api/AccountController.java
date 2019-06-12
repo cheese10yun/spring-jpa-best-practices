@@ -3,13 +3,10 @@ package com.cheese.springjpa.Account.api;
 import com.cheese.springjpa.Account.application.AccountService;
 import com.cheese.springjpa.Account.dao.AccountRepository;
 import com.cheese.springjpa.Account.dao.AccountSearchService;
-import com.cheese.springjpa.Account.domain.Email;
-import com.cheese.springjpa.Account.domain.QAccount;
 import com.cheese.springjpa.Account.dto.AccountDto;
 import com.cheese.springjpa.Account.dto.AccountDto.Res;
 import com.cheese.springjpa.Account.dto.AccountSearchType;
 import com.cheese.springjpa.common.model.PageRequest;
-import com.querydsl.core.types.Predicate;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -82,20 +79,5 @@ public class AccountController {
     public AccountDto.Res updateMyAccount(@PathVariable final long id, @RequestBody final AccountDto.MyAccountReq dto) {
         return new AccountDto.Res(accountService.updateMyAccount(id, dto));
     }
-
-
-  @GetMapping("/email/existence")
-  public boolean existEmail(@RequestParam String email) {
-    final QAccount account = QAccount.account;
-    Predicate predicate = account.email.eq(Email.of(email));
-    return accountRepository.exists(predicate);
-  }
-
-  @GetMapping("/count")
-  public long count(@RequestParam String email) {
-    final QAccount account = QAccount.account;
-    Predicate predicate = account.email.value.like(email + "%");
-    return accountRepository.count(predicate);
-  }
 
 }
