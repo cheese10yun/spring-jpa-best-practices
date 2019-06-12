@@ -91,4 +91,11 @@ public class AccountController {
     return accountRepository.exists(predicate);
   }
 
+  @GetMapping("/count")
+  public long count(@RequestParam String email) {
+    final QAccount account = QAccount.account;
+    Predicate predicate = account.email.value.like(email + "%");
+    return accountRepository.count(predicate);
+  }
+
 }

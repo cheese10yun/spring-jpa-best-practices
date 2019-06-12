@@ -23,7 +23,8 @@
 12. [step-12: 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-12.md)
 13. [step-13: Query Dsl이용한 페이징 API 만들기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-13.md)
 14. [step-14: JUnit 5적용하기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-14.md)
-15. [step-15: Querydsl를 이용해서 Repository 확장하기](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-15.md)
+15. [step-15: Querydsl를 이용해서 Repository 확장하기(1)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-15.md)
+16. [step-16: Querydsl를 이용해서 Repository 확장하기(2)](https://github.com/cheese10yun/spring-jpa-best-practices/blob/master/doc/step-16.md)
 
 **step-XX Branch 정보를 의미합니다. 보고 싶은 목차의 Branch로 checkout을 해주세요**
 

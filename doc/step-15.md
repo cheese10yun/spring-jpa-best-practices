@@ -1,4 +1,4 @@
-# step-15: Querydsl를 이용해서 Repository 확장하기
+# step-15: Querydsl를 이용해서 Repository 확장하기 (1)
 
 
 ## Repository Code
