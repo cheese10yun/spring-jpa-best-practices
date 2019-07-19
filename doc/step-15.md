@@ -105,8 +105,7 @@ public class AccountRepositoryTest {
 
 중요한 부분은 `findRecentlyRegistered_test` 으로 `AccountCustomRepository`에서 정의된 메서드이지만 `accountRepository`를 이용해서 호출하고 있습니다. 
 
-즉 `accountRepository` 객체를 통해서 
- 복잡한 쿼리의 세부 구현체 객체를 구체적으로 알 필요 없이 사용할 수 있습니다. **이는 의존성을 줄일 수 있는 좋은 구조라고 생각합니다.**
+즉 `accountRepository` 객체를 통해서 복잡한 쿼리의 세부 구현체 객체를 구체적으로 알 필요 없이 사용할 수 있습니다. **이는 의존성을 줄일 수 있는 좋은 구조라고 생각합니다.**
 
 ## 결론
 `Repository`에서 복잡한 조회 쿼리를 작성하는 것은 유지 보수 측면에서 좋지 않습니다. 쿼리 메서드로 표현이 어려우며 `@Qeury` 어노테이션을 통해서 작성된 쿼리는 type safe하지 않은 단점이 있습니다. 이것을 **QueryDsl으로 해결하고 다형성을 통해서 복잡한 쿼리의 세부 구현은 감추고 `Repository`를 통해서 사용하도록 하는 것이 핵심입니다.**

@@ -5,7 +5,7 @@ API을 개발하다 보면 프런트에서 넘어온 값에 대한 유효성 검
 ## 중요 포인트
 
 * `@Valid`를 통한 유효성검사
-* `@ControllerAdvice`를 이용한 Exception 헨들링
+* `@ControllerAdvice`를 이용한 Exception 핸들링
 * `ErrorCode` 에러 메시지 통합
 
 ## @Valid 를 통한 유효성검사
@@ -24,7 +24,7 @@ public static class SignUpReq {
     private String zip;
 }
 ```
-이전 단계에서 작성한 회원가입을 위한 SignUpReq.class에 새롭게 추가된 `@Email`, `@NotEmpty` 어 로테이션을 추가했습니다. 이 밖에 다양한 어노테이션들이 있습니다. 아래의 컨트롤러에서  `@Valid` 어 로테이션을 통해서 유효성 검사 가를 진행하고 유효성 검사를 실패하면 `MethodArgumentNotValidException` 예외가 발생합니다.
+이전 단계에서 작성한 회원가입을 위한 SignUpReq.class에 새롭게 추가된 `@Email`, `@NotEmpty` 어노테이션을 추가했습니다. 이 밖에 다양한 어노테이션들이 있습니다. 아래의 컨트롤러에서  `@Valid` 어노테이션을 통해서 유효성 검사를 진행하고 유효성 검사를 실패하면 `MethodArgumentNotValidException` 예외가 발생합니다.
 
 ### Controller에서 유효성 검사
 ```java
@@ -34,10 +34,10 @@ public AccountDto.Res signUp(@RequestBody @Valid final AccountDto.SignUpReq dto)
     return new AccountDto.Res(accountService.create(dto));
 }
 ```
-컨트롤러에 `@Valid` 어 로테이션을 추가했습니다. `SignUpReq` 클래스의 유효성 검사가 실패했을 경우 `MethodArgumentNotValidException` 예외가 발생하게 됩니다. **프론트에서 넘겨받은 값에 대한 유효성 검사는 엄청난 반복적인 작업이며 실패했을 경우 사용자에게 적절한 Response 값을 리턴해주는 것 또한 중요 비즈니스 로직이 아님에도 불과하고 많은 시간을 할애하게 됩니다.** 다음 부분은 `MethodArgumentNotValidException` 발생시 공통적으로 **사용자에게 적절한 Response 값을 리턴해주는 작업을 진행하겠습니다.**
+컨트롤러에 `@Valid` 어노테이션을 추가했습니다. `SignUpReq` 클래스의 유효성 검사가 실패했을 경우 `MethodArgumentNotValidException` 예외가 발생하게 됩니다. **프론트에서 넘겨받은 값에 대한 유효성 검사는 엄청난 반복적인 작업이며 실패했을 경우 사용자에게 적절한 Response 값을 리턴해주는 것 또한 중요 비즈니스 로직이 아님에도 불과하고 많은 시간을 할애하게 됩니다.** 다음 부분은 `MethodArgumentNotValidException` 발생시 공통적으로 **사용자에게 적절한 Response 값을 리턴해주는 작업을 진행하겠습니다.**
 
 
-## @ControllerAdvice를 이용한 Exception 헨들링
+## @ControllerAdvice를 이용한 Exception 핸들링
 
 ```Java
 @ControllerAdvice
@@ -49,7 +49,7 @@ public class ErrorExceptionController {
 	}
 }
 ```
-`@ControllerAdvice` 어 로테이션을 추가하면 특정 Exception을 핸들링하여 적절한 값을 Response 값으로 리턴해줍니다. 위처럼 별다른 `MethodArgumentNotValidException` 핸들링을 하지 않으면 스프링 자체의 에러 Response 값을 아래와 같이 리턴해줍니다.
+`@ControllerAdvice` 어노테이션을 추가하면 특정 Exception을 핸들링하여 적절한 값을 Response 값으로 리턴해줍니다. 위처럼 별다른 `MethodArgumentNotValidException` 핸들링을 하지 않으면 스프링 자체의 에러 Response 값을 아래와 같이 리턴해줍니다.
 
 ### Error Response
 ```json
@@ -97,7 +97,7 @@ public class ErrorExceptionController {
   "path": "/accounts"
 }
 ```
-너무나 많은 값을 돌려보내 주고 있으며 시스템 정보에 대한 값들도 포함되고 있어 위처럼 Response 값을 돌려보내는 것은 바람직하지 않습니다. 또 자체적으로 돌려보내 주는 Response 결과를 공통적인 포맷으로 가져가는 것은 최종적으로 프론트 엔드에서 처리해야 하므로 항상 공통적인 Response 포맷일 유지해야 합니다. 아래 `Error Response` 클래스를 통해서 공통적인 예외 Response 값을 갖도록 하겠습니다.
+너무나 많은 값을 돌려보내 주고 있으며 시스템 정보에 대한 값들도 포함되고 있어 위처럼 Response 값을 돌려보내는 것은 바람직하지 않습니다. 또 자체적으로 돌려보내 주는 Response 결과를 공통적인 포맷으로 가져가는 것은 최종적으로 프론트 엔드에서 처리해야 하므로 항상 공통적인 Response 포맷을 유지해야 합니다. 아래 `Error Response` 클래스를 통해서 공통적인 예외 Response 값을 갖도록 하겠습니다.
 
 ### MethodArgumentNotValidException의 Response 처리
 
@@ -170,7 +170,7 @@ public class ErrorResponse {
   ]
 }
 ```
-동일한 ErrorResponse 값을 갖게 되었으며 어느 칼럼에서 무슨 무슨 문제들이 발생했는지 알 수 있게 되었습니다. `@Valid` 어 로테이션으로 발생하는 `MethodArgumentNotValidException`들은 모두 handleMethodArgumentNotValidException 메서드를 통해서 공통된 Response 값을 리턴합니다. **이제부터는 @Valid, 해당 필드에 맞는 어 로테이션을 통해서 모든 유효성 검사를 진행할 수 있습니다.**
+동일한 ErrorResponse 값을 갖게 되었으며 어느 칼럼에서 무슨 무슨 문제들이 발생했는지 알 수 있게 되었습니다. `@Valid` 어노테이션으로 발생하는 `MethodArgumentNotValidException`들은 모두 handleMethodArgumentNotValidException 메서드를 통해서 공통된 Response 값을 리턴합니다. **이제부터는 @Valid, 해당 필드에 맞는 어노테이션을 통해서 모든 유효성 검사를 진행할 수 있습니다.**
 
 
 
@@ -192,7 +192,7 @@ public Account findById(long id) {
 }
 ```
 
-### handleAccountNotFoundException : 헨들링
+### handleAccountNotFoundException : 핸들링
 ```java
 @ExceptionHandler(value = {
         AccountNotFoundException.class
@@ -241,15 +241,15 @@ public enum ErrorCode {
 1. 중복적으로 작성되는 메시지들이 너무 많습니다.
 	- 예를 들어 `해당 회원을 찾을 수 없습니다.` 메시지를 로그에 남기는 메시지 형태는 너무나도 많은 형태입니다.
 2. 메시지 변경이 힘듭니다.
-	- 메시지가 스트링 형식으로 모든 소스에 흩어져있을 경우 메시지 변경 시에 모든 곳을 다 찾아서 변경해야 합니다.모든 곳을 다 찾아서 변경해야 합니다.
+	- 메시지가 스트링 형식으로 모든 소스에 흩어져있을 경우 메시지 변경 시에 모든 곳을 다 찾아서 변경해야 합니다.
 
 
 ## 단점
 위의 유효성 검사의 단점은 다음과 같습니다.
 
 1. 모든 Request Dto에 대한 반복적인 유효성 검사의 어노테이션이 필요합니다.
-	- 회원 가입, 회원 정보 수정 등등 지속적으로 DTO 클래스가 추가되고 그때마다 반복적으로 어 로테이션이 추가됩니다.
+	- 회원 가입, 회원 정보 수정 등등 지속적으로 DTO 클래스가 추가되고 그때마다 반복적으로 어노테이션이 추가됩니다.
 2. 유효성 검사 로직이 변경되면 모든 곳에 변경이 따른다.
 	- 만약 비밀번호 유효성 검사가 특수문자가 추가된다고 하면 비밀번호 변경에 따른 유효성 검사를 정규 표현식의 변경을 모든 DTO마다 해줘야 합니다.
 
-이러한 단점들은 다음 `step-03 : 효과적인 validate, 예외 처리 처리 (2)`에서 다루어 보겠습니다. 지속적으로 포스팅이 어 가겠습니다. 긴 글 읽어주셔서 감사합니다.
+이러한 단점들은 다음 `step-03 : 효과적인 validate, 예외 처리 처리 (2)`에서 다루어 보겠습니다. 지속적으로 포스팅이어 가겠습니다. 긴 글 읽어주셔서 감사합니다.
