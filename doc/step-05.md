@@ -66,7 +66,7 @@ public class DeliveryLog {
 **지금부터는 1:N 관계 팁에 관한 이야기를 진행하겠습니다.**
 
 * Delivery를 통해서 DeliveryLog를 관리함으로 `CascadeType.PERSIST` 설정을 주었습니다.
-* 1: N 관계를 맺을 경우 List를 주로 사용하는데 객체 생성을 null로 설정하는 것보다 `new ArrayList&amplt&ampgt();`설정하는 것이 바람직합니다. 이유는 다음과 같습니다.
+* 1: N 관계를 맺을 경우 List를 주로 사용하는데 객체 생성을 null로 설정하는 것보다 `new ArrayList<>();`설정하는 것이 바람직합니다. 이유는 다음과 같습니다.
 
  ```java
  private void verifyStatus(DeliveryStatus status, Delivery delivery) {
@@ -75,7 +75,7 @@ public class DeliveryLog {
      }
  }
  ```
-* 초기화하지 않았을 경우 null로 초기화되며 ArrayList에서 지원해주는 함수를 사용할 수 없습니다. 1:N 관계에서 N이 없는 경우 null인 상태인 보다 Empty 상태가 훨씬 직관적입니다. null의 경우 값을 못가져 온것인지 값이 없는 것인지 의미가 분명하지 않습니다.
+* 초기화하지 않았을 경우 null로 초기화되며 ArrayList에서 지원해주는 함수를 사용할 수 없습니다. 1:N 관계에서 N이 없는 경우 null인 상태인 보다 Empty 상태가 훨씬 직관적입니다. null의 경우 값을 못 가져온 것인지 값이 없는 것인지 의미가 분명하지 않습니다.
 
 ```java
 public void addLog(DeliveryStatus status) {

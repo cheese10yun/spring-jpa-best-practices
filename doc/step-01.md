@@ -150,7 +150,7 @@ public class AccountDto {
 Account에 정보를 변경하는 API가 있다고 가정 했을 경우 RequestBody를 Account 클래스로 받게 된다면 다음과 같은 문제가 발생합니다.
 
 * 데이터 안전성
-  - 정보 변경 API에서는 firstName, lastName 두 속성만 변경할 수 있다고 했으면 Account 클래스로 RequestBody를 받게 된다면 email, password, Account 클래의의 모든 속성값들을 컨트롤러를 통해서 넘겨받을 수 있게 되고 원치 않은 데이터 변경이 발생할 수 있습니다.
+  - 정보 변경 API에서는 firstName, lastName 두 속성만 변경할 수 있다고 했으면 Account 클래스로 RequestBody를 받게 된다면 email, password, Account 클래스의 모든 속성값들을 컨트롤러를 통해서 넘겨받을 수 있게 되고 원치 않은 데이터 변경이 발생할 수 있습니다.
   - firstName, lastName 속성 이외의 값들이 넘어온다면 그것은 잘못된 입력값이고 그런 값들을 넘겼을 경우 Bad Request 처리하는 것이 안전합니다.
    - Response 타입이 Account 클래스일 경우 계정의 모든 정보가 노출 되게 됩니다. JsonIgnore 속성들을 두어 임시로 막는 것은 바람직하지 않습니다.속성들을 두어 임시로 막는 것은 바람직하지 않습니다.
 * 명확해지는 요구사항

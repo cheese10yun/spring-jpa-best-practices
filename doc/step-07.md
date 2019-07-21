@@ -21,7 +21,7 @@ class Email {
     private String value;
 }
 ```
-위처럼 단순 String 자료형에서 Email 자로 형으로 통일이 됩니다. **자료형이 통일되면 많은 더욱 안전성이 높아지는 효과가 있습니다.**
+위처럼 단순 String 자료형에서 Email 자료형으로 통일이 됩니다. **자료형이 통일되면 많은 더욱 안전성이 높아지는 효과가 있습니다.**
 
 ```java
 public Account findByEmail(final Email email) { //단순 문자열일 경우 (final String email)
@@ -53,13 +53,13 @@ public class Email {
 
 도메인 객체에 추가할 때는 Account 도메인 클래스가 갖는 책임들이 많아집니다. 또 이메일은 어디서든지 사용할 수 있는데 Account 객체에서 이 기능을 정의하는 것은 올바르지 않습니다.
 
-유틸성 클래스에 추가하는 것 또한 좋지 않아 보입니다. 일단 유틸성 클래스에 해당 기능이 있는지 알아봐야 하고 기능이 있음에도 불구하고 그것을 모르고 추가하여 중복 코가 발생하는 일이 너무나도 흔하게 발생합니다.
+유틸성 클래스에 추가하는 것 또한 좋지 않아 보입니다. 일단 유틸성 클래스에 해당 기능이 있는지 알아봐야 하고 기능이 있음에도 불구하고 그것을 모르고 추가하여 중복 코드가 발생하는 일이 너무나도 흔하게 발생합니다.
 
-이것을 Email 형으로 빼놓았다면 아래처럼 Email 객체를 사용하는 곳 어디든지 사용할 수 있습니다. 해당 기능은 Email 객체가 해야 하는 일이고 또 그 일을 가장 잘할 수 있는 객체입니다. 또 한 코드가 아주 이해하기 쉽게 됩니다. 객체의 기능이 풍부해집니다.
+이것을 Email 형으로 빼놓았다면 아래처럼 Email 객체를 사용하는 곳 어디든지 사용할 수 있습니다. 해당 기능은 Email 객체가 해야 하는 일이고 또 그 일을 가장 잘할 수 있는 객체입니다. 또한 코드가 아주 이해하기 쉽게 됩니다. 객체의 기능이 풍부해집니다.
 
 ```java
 email.getHost();
-email.getId());
+email.getId();
 ```
 
 ## 재사용성
@@ -67,7 +67,7 @@ email.getId());
 가령 해외 송금을 하는 기능이 있다고 가정할 경우 Remittance 클래스는 보내는 금액, 나라, 통화, 받는 금액, 나라, 통화가 필요하다. 이처럼 도메인이 복잡해질수록 더 재사용성은 중요합니다.
 
 ```java
-class Remittance{
+class Remittance {
     //자료형이 없는 경우
     @Column(name = "send_amount") private double sendAamount;
     @Column(name = "send_country") private String sendCountry;

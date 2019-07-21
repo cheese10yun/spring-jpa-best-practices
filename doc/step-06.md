@@ -71,6 +71,7 @@ public void updateMyAccount(AccountDto.MyAccountReq dto) {
 위의 예제와 같은 예제 코드입니다. findById 메소드를 통해서 영속성을 가진 객체를 가져오고 도메인에 작성된 updateMyAccount를 통해서 업데이트를 진행하고 있습니다.
 
 **repository.save() 메소드를 사용하지 않았습니다. 다시 말해 메소드들은 객체 그 자신을 통해서 데이터베이스 변경작업을 진행하고, create 메서드에 대해서만 repository.save()를 사용합니다**
+
 ### create
 ```java
 // 전체 코드를 보시는 것을 추천드립니다.
