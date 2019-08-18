@@ -33,8 +33,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.PENDING;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.DELIVERING));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.DELIVERING);
     }
 
     @Test
@@ -42,8 +42,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.PENDING;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.CANCELED));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.CANCELED);
     }
 
 
@@ -52,8 +52,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.DELIVERING;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.COMPLETED));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.COMPLETED);
     }
 
     @Test(expected = DeliveryStatusEqaulsException.class)
@@ -61,8 +61,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.DELIVERING;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.DELIVERING));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.DELIVERING);
     }
 
     @Test(expected = DeliveryAlreadyDeliveringException.class)
@@ -70,8 +70,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.DELIVERING;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.CANCELED));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.CANCELED);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -79,8 +79,8 @@ public class DeliveryLogTest {
         final Delivery delivery = buildDelivery();
         final DeliveryStatus status = DeliveryStatus.COMPLETED;
 
-        delivery.getLogs().add(buildLog(delivery, status));
-        delivery.getLogs().add(buildLog(delivery, DeliveryStatus.CANCELED));
+        delivery.addLog(status);
+        delivery.addLog(DeliveryStatus.CANCELED);
 
     }
 
