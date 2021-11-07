@@ -38,7 +38,7 @@ public class AccountService {
     }
 }
 ```
-정말 간단합니다. 컨롤어에서 `Pageable` 인터페이스를 받고 `repository` 메서드 `findAll(pageable)`로 넘기기만 하면됩니다.
+정말 간단합니다. 컨트롤러에서 `Pageable` 인터페이스를 받고 `repository` 메서드 `findAll(pageable)`로 넘기기만 하면됩니다.
 
 
 ### 요청
@@ -240,7 +240,7 @@ public final class PageRequest {
 
 * `setPage(int page)` 메서드를 통해서 0보다 작은 페이지를 요청했을 경우 1 페이지로 설정합니다.
 * `setSize(int size)` 메서드를 통해서 요청 사이즈 50 보다 크면 기본 사이즈인 10으로 바인딩 합니다.
-* `of()` 메서트를 통해서 `PageRequest` 객체를 응답해줍니다. 페이지는 0부터 시작하니 `page -1` 합니다. 본 예제에서는 sort는 `createdAt` 기준으로 진행합니다.
+* `of()` 메서드를 통해서 `PageRequest` 객체를 응답해줍니다. 페이지는 0부터 시작하니 `page -1` 합니다. 본 예제에서는 sort는 `createdAt` 기준으로 진행합니다.
 
 ### 컨트롤러
 ```java
