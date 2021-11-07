@@ -214,7 +214,7 @@ protected ErrorResponse handleAccountNotFoundException(AccountNotFoundException 
   "errors": []
 }
 ```
-위처럼 새로운 Exception 정의하고 핸들링할 수 있습니다. 이 또 한 공통된 Response 갖게 되며 예외가 발생했을 경우 throw를 통해 해당 Exception 잘 처리해 주는 곳으로 던지게 됨으로써 비즈니스 로직과 예외 처리를 하는 로직이 분리되어 코드 가속성 및 유지 보수에 좋다고 생각합니다.
+위처럼 새로운 Exception 정의하고 핸들링할 수 있습니다. 이 또 한 공통된 Response 갖게 되며 예외가 발생했을 경우 throw를 통해 해당 Exception 잘 처리해 주는 곳으로 던지게 됨으로써 비즈니스 로직과 예외 처리를 하는 로직이 분리되어 코드 가독성 및 유지 보수에 좋다고 생각합니다.
 
 ## ErrorCode
 ```Java
