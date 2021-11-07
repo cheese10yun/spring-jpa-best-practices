@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties({"host", "id"})
 public class Email {
 
-    @org.hibernate.validator.constraints.Email
+    @javax.validation.constraints.Email
     @Column(name = "email", nullable = false, unique = true)
     private String value;
 
