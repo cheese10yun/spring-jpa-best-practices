@@ -34,7 +34,10 @@ public AccountDto.Res signUp(@RequestBody @Valid final AccountDto.SignUpReq dto)
     return new AccountDto.Res(accountService.create(dto));
 }
 ```
-컨트롤러에 `@Valid` 어노테이션을 추가했습니다. `SignUpReq` 클래스의 유효성 검사가 실패했을 경우 `MethodArgumentNotValidException` 예외가 발생하게 됩니다. **프론트에서 넘겨받은 값에 대한 유효성 검사는 엄청난 반복적인 작업이며 실패했을 경우 사용자에게 적절한 Response 값을 리턴해주는 것 또한 중요 비즈니스 로직이 아님에도 불과하고 많은 시간을 할애하게 됩니다.** 다음 부분은 `MethodArgumentNotValidException` 발생시 공통적으로 **사용자에게 적절한 Response 값을 리턴해주는 작업을 진행하겠습니다.**
+컨트롤러에 `@Valid` 어노테이션을 추가했습니다. `SignUpReq` 클래스의 유효성 검사가 실패했을 경우 
+`MethodArgumentNotValidException` 예외가 발생하게 됩니다. **프론트에서 넘겨받은 값에 대한 유효성 검사는 
+엄청난 반복적인 작업이며 실패했을 경우 사용자에게 적절한 Response 값을 리턴해주는 것 또한 중요 비즈니스 로직이 아님에도 불구하고 
+많은 시간을 할애하게 됩니다.** 다음 부분은 `MethodArgumentNotValidException` 발생시 공통적으로 **사용자에게 적절한 Response 값을 리턴해주는 작업을 진행하겠습니다.**
 
 
 ## @ControllerAdvice를 이용한 Exception 핸들링
