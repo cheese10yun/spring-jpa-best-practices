@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/cheese10yun/spring-jpa-best-practices.svg?branch=master)](https://travis-ci.org/cheese10yun/spring-jpa-best-practices)
 [![Coverage Status](https://coveralls.io/repos/github/cheese10yun/spring-jpa-best-practices/badge.svg?branch=master)](https://coveralls.io/github/cheese10yun/spring-jpa-best-practices?branch=master)
 [![codecov](https://codecov.io/gh/cheese10yun/spring-jpa-best-practices/branch/master/graph/badge.svg)](https://codecov.io/gh/cheese10yun/spring-jpa-best-practices)
-[![HitCount](http://hits.dwyl.io/cheese10yun/spring-jpa-best-practices.svg)](http://hits.dwyl.io/cheese10yun/spring-jpa-best-practices)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fcheese10yun%2Fspring-jpa-best-practices&count_bg=%2379C83D&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 # Spring-Jpa Best Practices
 
